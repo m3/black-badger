@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import collectionsData from './data/collections.json';
+import productsData from './data/products.json';
 
 const translations = {
   sv: {
@@ -39,7 +40,14 @@ const translations = {
     footerText: "Black Badger är James Thompsons Göteborgs-baserade designateljé som skapar framtidens bärbara konst av okonventionella material.",
     contactTitle: "Ateljé & Kontakt",
     contactAddress: "Adress",
-    contactAddressVal: "Göteborg, Sverige (Besök endast enligt överenskommelse)"
+    contactAddressVal: "Göteborg, Sverige (Besök endast enligt överenskommelse)",
+
+    // E-commerce localizations
+    priceLabel: "Pris",
+    sizesLabel: "Storlekar",
+    inStock: "Tillgänglig",
+    byCommission: "Beställningsvara",
+    allProducts: "Alla Produkter"
   },
   en: {
     tagline: "James Thompson — Gothenburg, Sweden",
@@ -78,7 +86,14 @@ const translations = {
     footerText: "Black Badger is James Thompson's Gothenburg-based design studio, crafting the future of wearable art from unconventional media.",
     contactTitle: "Atelier & Location",
     contactAddress: "Address",
-    contactAddressVal: "Gothenburg, Sweden (Visits by private appointment only)"
+    contactAddressVal: "Gothenburg, Sweden (Visits by private appointment only)",
+
+    // E-commerce localizations
+    priceLabel: "Price",
+    sizesLabel: "Sizes",
+    inStock: "In Stock",
+    byCommission: "By Commission",
+    allProducts: "All Products"
   }
 };
 
@@ -88,7 +103,7 @@ const watchCollabs = [
     brand: "Arcanaut",
     name: "Arcanaut ARC II Fordite & Havender",
     desc: {
-      sv: "Delägare och designer för det danska klockmärket Arcanaut. Urtavlor handslipade från äkta Detroit-agat (Fordite) samt lysande 'Mussel' och 'Havender' urtavlor.",
+      sv: "Delägare och designer för det dan-svenska klockmärket Arcanaut. Urtavlor handslipade från äkta Detroit-agat (Fordite) samt lysande 'Mussel' och 'Havender' urtavlor.",
       en: "Co-owner and lead materials designer of the Danish watchmaker Arcanaut. Feat. hand-machined dials sculpted from genuine Fordite or glowing composites."
     }
   },
@@ -148,13 +163,106 @@ const customMaterials = [
   }
 ];
 
+// Helper to determine the material category of a scraped product
+const getProductMaterial = (product) => {
+  const title = product.title.toLowerCase();
+  const desc = product.description.toLowerCase();
+  
+  if (title.includes('fordite') || desc.includes('fordite')) {
+    return 'fordite';
+  }
+  if (title.includes('damascus') || title.includes('tvåblå') || desc.includes('damascus') || desc.includes('damasteel') || title.includes('bluetongue')) {
+    return 'damascus';
+  }
+  if (title.includes('horizon') || desc.includes('lume') || desc.includes('badgerite') || desc.includes('super-luminova')) {
+    return 'carbon'; // Carbon Fiber & Lume category
+  }
+  if (title.includes('superconductor') || desc.includes('superconductor')) {
+    return 'superconductor';
+  }
+  return 'carbon'; // Fallback
+};
+
+// Premium E-commerce Product Card component
+function ProductCard({ product, lang, t, onInquire }) {
+  const [hovered, setHovered] = useState(false);
+
+  // Hover image swap interaction
+  const hasMultipleImages = product.images && product.images.length > 1;
+  const currentImage = hasMultipleImages && hovered 
+    ? product.images[1] 
+    : product.images[0];
+
+  const matKey = getProductMaterial(product);
+  const matName = collectionsData.materials.find(m => m.id === matKey)?.name[lang] || (lang === 'sv' ? 'Signaturutgåva' : 'Signature Edition');
+
+  return (
+    <div 
+      className="product-card"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="product-image-wrapper">
+        <img 
+          src={currentImage} 
+          alt={product.title} 
+          className="product-image"
+          loading="lazy"
+        />
+        <div className="product-badge-group">
+          <span className={`availability-tag ${product.available ? 'available' : 'commission'}`}>
+            <span className="status-indicator-dot"></span>
+            {product.available ? t.inStock : t.byCommission}
+          </span>
+          <span className="material-category-tag">{matName}</span>
+        </div>
+      </div>
+
+      <div className="product-card-body">
+        <h3 className="product-card-title">{product.title}</h3>
+        <p className="product-card-desc">{product.description}</p>
+        
+        {product.sizes && product.sizes.length > 0 ? (
+          <div className="product-sizes-section">
+            <span className="sizes-title">{t.sizesLabel}:</span>
+            <div className="sizes-badges">
+              {product.sizes.slice(0, 4).map(size => (
+                <span key={size} className="size-pill">{size}</span>
+              ))}
+              {product.sizes.length > 4 && (
+                <span className="size-pill-more">+{product.sizes.length - 4}</span>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="product-sizes-section">
+            <span className="sizes-title">{t.sizesLabel}:</span>
+            <span className="sizes-bespoke">{lang === 'sv' ? 'Måttbeställs efter din storlek' : 'Custom sized to your order'}</span>
+          </div>
+        )}
+
+        <div className="product-card-footer">
+          <div className="product-price">
+            <span className="price-currency">$</span>
+            <span className="price-amount">{parseFloat(product.price).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
+            <span className="price-suffix">USD</span>
+          </div>
+          <button className="btn-glow btn-card-action" onClick={() => onInquire(product.title)}>
+            {t.inquireBtn}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [lang, setLang] = useState('en');
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme-bb') || 'dark';
   });
   const [scrolled, setScrolled] = useState(false);
-  const [activeMaterial, setActiveMaterial] = useState('damascus');
+  const [activeMaterial, setActiveMaterial] = useState('all');
   const [showInquiryModal, setShowInquiryModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', size: '', material: 'damascus', msg: '' });
   const [inquirySent, setInquirySent] = useState(false);
@@ -187,9 +295,14 @@ export default function App() {
     setTimeout(() => {
       setShowInquiryModal(false);
       setInquirySent(false);
-      setFormData({ name: '', email: '', size: '', material: activeMaterial, msg: '' });
+      setFormData({ name: '', email: '', size: '', material: 'damascus', msg: '' });
     }, 2000);
   };
+
+  // Filter products matching active tab
+  const filteredProducts = activeMaterial === 'all'
+    ? productsData
+    : productsData.filter(p => getProductMaterial(p) === activeMaterial);
 
   return (
     <div className="bb-app">
@@ -197,8 +310,20 @@ export default function App() {
       <header className={`bb-header ${scrolled ? 'scrolled' : ''}`}>
         <div className="bb-container header-container">
           <a href="#home" className="logo-link">
-            <span className="logo-title">BLACK BADGER</span>
-            <span className="logo-subtitle">GOTHEBORG · ESTD 2013</span>
+            <div className="logo-wrapper">
+              <svg className="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Symmetrical avant-garde badger emblem */}
+                <path d="M50 10 L85 30 V65 L50 90 L15 65 V30 L50 10 Z" stroke="currentColor" strokeWidth="4" strokeLinejoin="round"/>
+                <path d="M50 10 V90" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4"/>
+                <path d="M15 30 L50 55 L85 30" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/>
+                <path d="M30 65 L50 50 L70 65" stroke="currentColor" strokeWidth="3" strokeLinejoin="round"/>
+                <circle cx="50" cy="50" r="5" fill="var(--lume-glow)" className="logo-glow-dot"/>
+              </svg>
+              <div className="logo-text-group">
+                <span className="logo-title">BLACK BADGER</span>
+                <span className="logo-subtitle">GOTHEBORG · ESTD 2013</span>
+              </div>
+            </div>
           </a>
 
           <nav>
@@ -242,7 +367,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Collections Section */}
+      {/* Collections & E-commerce Catalog Section */}
       <section id="collections" className="section bg-dim">
         <div className="bb-container">
           <div className="section-header">
@@ -251,8 +376,14 @@ export default function App() {
             <p className="section-desc">{t.colDesc}</p>
           </div>
 
-          {/* Scaffolding Category Filter */}
+          {/* Interactive Material Filter Tabs */}
           <div className="collections-nav">
+            <button
+              className={`tab-btn ${activeMaterial === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveMaterial('all')}
+            >
+              {t.allProducts}
+            </button>
             {collectionsData.materials.map(mat => (
               <button
                 key={mat.id}
@@ -264,31 +395,66 @@ export default function App() {
             ))}
           </div>
 
-          {/* Active Material Scaffolding Grid */}
-          <div className="showcase-grid">
-            {collectionsData.materials
-              .filter(mat => mat.id === activeMaterial)
-              .map(mat => (
-                <div key={mat.id} className="material-showcase-card">
-                  <div className="card-border-glow"></div>
-                  <div className="material-info">
-                    <h3>{mat.name[lang]}</h3>
-                    <p>{mat.description[lang]}</p>
-                    <div className="specifications-scaffold">
-                      <span>⚡ HANDMADE IN SWEDEN</span>
-                      <span>🛡️ DAMASCUS OR AERO COMPOSITE</span>
-                      <span>💎 INDIVIDUALLY MEASURED</span>
+          {/* Material Category Overview Panel (Only shown when a specific material filter is active) */}
+          {activeMaterial !== 'all' && (
+            <div className="material-intro-panel" style={{ marginBottom: '48px' }}>
+              {collectionsData.materials
+                .filter(mat => mat.id === activeMaterial)
+                .map(mat => (
+                  <div key={mat.id} className="material-showcase-card">
+                    <div className="card-border-glow"></div>
+                    <div className="material-info">
+                      <h3>{mat.name[lang]}</h3>
+                      <p>{mat.description[lang]}</p>
+                      <div className="specifications-scaffold">
+                        <span>⚡ HANDMADE IN SWEDEN</span>
+                        <span>🛡️ RAW & UNCONVENTIONAL MEDIA</span>
+                        <span>💎 CUSTOM MEASURED TO ORDER</span>
+                      </div>
                     </div>
-                    <button className="btn-glow" onClick={() => {
-                      setFormData(prev => ({ ...prev, material: mat.id }));
-                      setShowInquiryModal(true);
-                    }}>
-                      {t.inquireBtn}
-                    </button>
                   </div>
-                </div>
-              ))}
+                ))}
+            </div>
+          )}
+
+          {/* Dynamic E-commerce Product Grid */}
+          <div className="products-grid">
+            {filteredProducts.map(product => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                lang={lang}
+                t={t}
+                onInquire={(productName) => {
+                  setFormData(prev => ({
+                    ...prev,
+                    material: getProductMaterial(product),
+                    msg: lang === 'sv'
+                      ? `Hej! Jag är intresserad av att beställa ringen "${productName}". Vänligen ge mig information om leveranstid och storlek.`
+                      : `Hi! I would like to inquire about ordering the "${productName}" ring. Please let me know the lead time and sizing details.`
+                  }));
+                  setShowInquiryModal(true);
+                }}
+              />
+            ))}
           </div>
+
+          {/* No products placeholder (e.g. Superconductors) */}
+          {filteredProducts.length === 0 && (
+            <div className="no-products-placeholder">
+              <p>
+                {lang === 'sv' 
+                  ? 'Inga standardprodukter för supraledare finns i lager just nu. James Thompson skapar supraledande ringar på direkt kommission.' 
+                  : 'No standard superconductor rings are in stock right now. James Thompson designs superconductor pieces on private commission only.'}
+              </p>
+              <button className="btn-glow" onClick={() => {
+                setFormData(prev => ({ ...prev, material: 'superconductor' }));
+                setShowInquiryModal(true);
+              }}>
+                {lang === 'sv' ? 'Initiera Kommissionsförfrågan' : 'Initiate Private Commission'}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -346,7 +512,7 @@ export default function App() {
           </div>
           <div className="studio-visual-container">
             <div className="glowing-mesh-scaffold">
-              <span>GOTHEBORG STUDIO</span>
+              <span>GOTHENBURG STUDIO</span>
             </div>
           </div>
         </div>
@@ -397,6 +563,8 @@ export default function App() {
               <li><a href="#collections">{t.navCollections}</a></li>
               <li><a href="#watches">{t.navWatches}</a></li>
               <li><a href="#materials">{t.navMaterials}</a></li>
+              <li><a href="#studio">{t.navStudio}</a></li>
+              <li><a href="#contact">{t.navContact}</a></li>
             </ul>
           </div>
         </div>
@@ -438,7 +606,7 @@ export default function App() {
                   <label>{lang === 'sv' ? 'Intresserad av material' : 'Interested in Material'}</label>
                   <select value={formData.material} onChange={e => setFormData(p => ({ ...p, material: e.target.value }))}>
                     <option value="damascus">{lang === 'sv' ? 'Damaskusstål' : 'Damascus Steel'}</option>
-                    <option value="carbon">{lang === 'sv' ? 'Kolfiber' : 'Carbon Fiber'}</option>
+                    <option value="carbon">{lang === 'sv' ? 'Kolfiber / Lume' : 'Carbon Fiber / Lume'}</option>
                     <option value="fordite">{lang === 'sv' ? 'Fordit' : 'Fordite'}</option>
                     <option value="superconductor">{lang === 'sv' ? 'Supraledare' : 'Superconductor'}</option>
                   </select>
