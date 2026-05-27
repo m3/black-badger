@@ -179,7 +179,7 @@ export default function App() {
   }, []);
 
   const toggleLanguage = () => setLang(prev => (prev === 'sv' ? 'en' : 'sv'));
-  const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : prev === 'light' ? 'pink' : 'dark'));
 
   const handleInquirySubmit = (e) => {
     e.preventDefault();
@@ -218,7 +218,7 @@ export default function App() {
             </button>
 
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-              {theme === 'dark' ? '☀️' : '🌙'}
+              {theme === 'dark' ? '☀️' : theme === 'light' ? '🌸' : '🌙'}
             </button>
 
             <button className="btn-glow" onClick={() => setShowInquiryModal(true)}>
