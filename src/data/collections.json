@@ -1,0 +1,48 @@
+{
+  "materials": [
+    {
+      "id": "damascus",
+      "name": {
+        "en": "Damascus Steel",
+        "sv": "Damaskusstål"
+      },
+      "description": {
+        "en": "Hand-folded and acid-etched industrial steel, creating mesmerizing wave patterns unique to every single cut.",
+        "sv": "Handsmidd och syraettsat industristål som skapar böljande unika vågmönster för varje enskild ring."
+      }
+    },
+    {
+      "id": "carbon",
+      "name": {
+        "en": "Carbon Fiber & Lume",
+        "sv": "Kolfiber & Lume"
+      },
+      "description": {
+        "en": "Aerospace-grade high-strength carbon fiber matrices combined with our glowing composite inserts.",
+        "sv": "Högpresterande kolfiber med extrem styrka och låg vikt, kombinerat med våra självlysande detaljer."
+      }
+    },
+    {
+      "id": "fordite",
+      "name": {
+        "en": "Fordite (Detroit Agate)",
+        "sv": "Fordit (Detroit-agat)"
+      },
+      "description": {
+        "en": "Rare specimens composed of thousands of layers of cured automotive paint, salvaged from historic assembly lines.",
+        "sv": "Sällsynta skapelser tillverkade av tusentals härdade billager i färgstark agat, räddade från historiska fabrikslinjer."
+      }
+    },
+    {
+      "id": "superconductor",
+      "name": {
+        "en": "Superconductor Cables",
+        "sv": "Supraledare"
+      },
+      "description": {
+        "en": "Industrial copper-niobium filaments engineered for high-energy physics, machined to expose incredible geometric cross-sections.",
+        "sv": "Industriell koppar-niobtråd utvecklad för högenergifysik, svarvad för att exponera ett slående geometriskt mönster."
+      }
+    }
+  ]
+}
