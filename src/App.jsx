@@ -187,7 +187,7 @@ const getProductMaterial = (product) => {
 };
 
 // Premium E-commerce Product Card component
-function ProductCard({ product, lang, t, onInquire }) {
+function ProductCard({ product, lang, t, onInquire, isFeatured }) {
   const [hovered, setHovered] = useState(false);
   const [isNight, setIsNight] = useState(false);
 
@@ -201,7 +201,7 @@ function ProductCard({ product, lang, t, onInquire }) {
 
   return (
     <div 
-      className="product-card"
+      className={`product-card ${isFeatured ? 'is-featured' : ''}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -479,12 +479,13 @@ export default function App() {
           {/* Dynamic E-commerce Product Grid */}
           <BlueprintGrid label="SECTION: MATERIAL_LOGISTICS">
             <div className="products-grid">
-              {filteredProducts.map(product => (
+              {filteredProducts.map((product, index) => (
                 <ProductCard
                   key={product.id}
                   product={product}
                   lang={lang}
                   t={t}
+                  isFeatured={index % 3 === 0}
                   onInquire={(productName) => {
                     setFormData(prev => ({
                       ...prev,

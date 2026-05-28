@@ -1072,6 +1072,23 @@ a {
   position: relative;
 }
 
+.product-card.is-featured {
+  grid-column: span 2;
+  flex-direction: row !important;
+}
+
+@media (max-width: 1024px) {
+  .product-card.is-featured {
+    grid-column: span 1;
+    flex-direction: column !important;
+  }
+}
+
+.product-card.is-featured .product-image-wrapper {
+  width: 50%;
+  aspect-ratio: 1.5;
+}
+
 .product-card:hover {
   border-color: var(--lume-glow);
   transform: translateY(-6px);
