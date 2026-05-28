@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo, useMemo, useCallback } from 'react';
 import collectionsData from './data/collections.json';
 import productsData from './data/products.json';
 import { BlueprintGrid } from './components/BlueprintGrid';
@@ -187,7 +187,7 @@ const getProductMaterial = (product) => {
 };
 
 // Premium E-commerce Product Card component
-function ProductCard({ product, lang, t, onInquire, isFeatured }) {
+const ProductCard = memo(({ product, lang, t, onInquire, isFeatured }) => {
   const [hovered, setHovered] = useState(false);
   const [isNight, setIsNight] = useState(false);
 
@@ -292,14 +292,14 @@ function ProductCard({ product, lang, t, onInquire, isFeatured }) {
             <span className="price-amount">{parseFloat(product.price).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
             <span className="price-suffix">USD</span>
           </div>
-          <button className="btn-glow btn-card-action" onClick={() => onInquire(product.title)}>
+          <button className="btn-glow btn-card-action" onClick={() => onInquire(product)}>
             {t.inquireBtn}
           </button>
         </div>
       </div>
     </div>
   );
-}
+});
 
 export default function App() {
   const [lang, setLang] = useState('en');
@@ -335,20 +335,37 @@ export default function App() {
   const toggleLanguage = () => setLang(prev => (prev === 'sv' ? 'en' : 'sv'));
   const toggleTheme = () => setTheme(prev => (prev === 'dark' ? 'light' : prev === 'light' ? 'pink' : 'dark'));
 
+  const closeInquiryModal = () => {
+    setShowInquiryModal(false);
+    setInquirySent(false);
+  };
+
+  const handleInquire = useCallback((product) => {
+    setFormData(prev => ({
+      ...prev,
+      material: getProductMaterial(product),
+      msg: lang === 'sv'
+        ? `Hej! Jag är intresserad av att beställa ringen "${product.title}". Vänligen ge mig information om leveranstid och storlek.`
+        : `Hi! I would like to inquire about ordering the "${product.title}" ring. Please let me know the lead time and sizing details.`
+    }));
+    setShowInquiryModal(true);
+  }, [lang]);
+
   const handleInquirySubmit = (e) => {
     e.preventDefault();
     setInquirySent(true);
     setTimeout(() => {
-      setShowInquiryModal(false);
-      setInquirySent(false);
+      closeInquiryModal();
       setFormData({ name: '', email: '', size: '', material: 'damascus', msg: '' });
     }, 2000);
   };
 
   // Filter products matching active tab
-  const filteredProducts = activeMaterial === 'all'
-    ? productsData
-    : productsData.filter(p => getProductMaterial(p) === activeMaterial);
+  const filteredProducts = useMemo(() => {
+    return activeMaterial === 'all'
+      ? productsData
+      : productsData.filter(p => getProductMaterial(p) === activeMaterial);
+  }, [activeMaterial]);
 
   return (
     <div className="bb-app">
@@ -496,16 +513,7 @@ export default function App() {
                   lang={lang}
                   t={t}
                   isFeatured={index % 3 === 0}
-                  onInquire={(productName) => {
-                    setFormData(prev => ({
-                      ...prev,
-                      material: getProductMaterial(product),
-                      msg: lang === 'sv'
-                        ? `Hej! Jag är intresserad av att beställa ringen "${productName}". Vänligen ge mig information om leveranstid och storlek.`
-                        : `Hi! I would like to inquire about ordering the "${productName}" ring. Please let me know the lead time and sizing details.`
-                    }));
-                    setShowInquiryModal(true);
-                  }}
+                  onInquire={handleInquire}
                 />
               ))}
             </div>
@@ -662,10 +670,10 @@ export default function App() {
       {/* Inquiry Form Modal Overlay */}
       {showInquiryModal && (
         <div className="inquiry-overlay" onClick={(e) => {
-          if (e.target.classList.contains('inquiry-overlay')) setShowInquiryModal(false);
+          if (e.target.classList.contains('inquiry-overlay')) closeInquiryModal();
         }}>
           <div className="inquiry-modal">
-            <button className="btn-close-modal" onClick={() => setShowInquiryModal(false)}>×</button>
+            <button className="btn-close-modal" onClick={closeInquiryModal}>×</button>
             <h3>{t.inquiryTitle}</h3>
             <p className="modal-desc">{t.inquiryDesc}</p>
 
@@ -677,20 +685,20 @@ export default function App() {
             ) : (
               <form onSubmit={handleInquirySubmit}>
                 <div className="form-group">
-                  <label>{lang === 'sv' ? 'Namn' : 'Name'}</label>
-                  <input type="text" required value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} />
+                  <label htmlFor="inquiry-name">{lang === 'sv' ? 'Namn' : 'Name'}</label>
+                  <input id="inquiry-name" type="text" required value={formData.name} onChange={e => setFormData(p => ({ ...p, name: e.target.value }))} />
                 </div>
                 <div className="form-group">
-                  <label>Email</label>
-                  <input type="email" required value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} />
+                  <label htmlFor="inquiry-email">Email</label>
+                  <input id="inquiry-email" type="email" required value={formData.email} onChange={e => setFormData(p => ({ ...p, email: e.target.value }))} />
                 </div>
                 <div className="form-group">
-                  <label>{lang === 'sv' ? 'Ringstorlek (om känd)' : 'Ring Size (if known)'}</label>
-                  <input type="text" placeholder="e.g. 62, 10, U" value={formData.size} onChange={e => setFormData(p => ({ ...p, size: e.target.value }))} />
+                  <label htmlFor="inquiry-size">{lang === 'sv' ? 'Ringstorlek (om känd)' : 'Ring Size (if known)'}</label>
+                  <input id="inquiry-size" type="text" placeholder="e.g. 62, 10, U" value={formData.size} onChange={e => setFormData(p => ({ ...p, size: e.target.value }))} />
                 </div>
                 <div className="form-group">
-                  <label>{lang === 'sv' ? 'Intresserad av material' : 'Interested in Material'}</label>
-                  <select value={formData.material} onChange={e => setFormData(p => ({ ...p, material: e.target.value }))}>
+                  <label htmlFor="inquiry-material">{lang === 'sv' ? 'Intresserad av material' : 'Interested in Material'}</label>
+                  <select id="inquiry-material" value={formData.material} onChange={e => setFormData(p => ({ ...p, material: e.target.value }))}>
                     <option value="damascus">{lang === 'sv' ? 'Damaskusstål' : 'Damascus Steel'}</option>
                     <option value="carbon">{lang === 'sv' ? 'Kolfiber / Lume' : 'Carbon Fiber / Lume'}</option>
                     <option value="fordite">{lang === 'sv' ? 'Fordit' : 'Fordite'}</option>
@@ -698,8 +706,8 @@ export default function App() {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label>{lang === 'sv' ? 'Meddelande' : 'Message'}</label>
-                  <textarea rows="4" required value={formData.msg} onChange={e => setFormData(p => ({ ...p, msg: e.target.value }))}></textarea>
+                  <label htmlFor="inquiry-msg">{lang === 'sv' ? 'Meddelande' : 'Message'}</label>
+                  <textarea id="inquiry-msg" rows="4" required value={formData.msg} onChange={e => setFormData(p => ({ ...p, msg: e.target.value }))}></textarea>
                 </div>
                 <button type="submit" className="btn-glow" style={{ width: '100%', marginTop: '10px' }}>
                   {lang === 'sv' ? 'Skicka Förfrågan' : 'Submit Build Request'}
