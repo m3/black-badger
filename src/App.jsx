@@ -256,7 +256,15 @@ function ProductCard({ product, lang, t, onInquire, isFeatured }) {
         <p className="product-card-desc">{product.description}</p>
         
         {product.lab_note && (
-          <LabNote note={product.lab_note} />
+          <>
+            {/* Connector between image and lab note */}
+            <div style={{ position: 'relative', height: '20px', marginLeft: '20px' }}>
+              <svg width="2" height="20" style={{ position: 'absolute', top: 0 }}>
+                <line x1="1" y1="0" x2="1" y2="20" stroke="var(--lume-glow)" strokeWidth="1" strokeDasharray="4 2" opacity="0.4" />
+              </svg>
+            </div>
+            <LabNote note={product.lab_note} hasConnector />
+          </>
         )}
 
         {product.sizes && product.sizes.length > 0 ? (
