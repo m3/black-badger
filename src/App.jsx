@@ -235,7 +235,7 @@ function ProductCard({ product, lang, t, onInquire, isFeatured }) {
         </div>
       </div>
 
-      <div className="product-card-body" style={{ paddingTop: '20px' }}>
+      <div className="product-card-body">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
           <h3 className="product-card-title">{product.title}</h3>
           {product.material_origin && (
@@ -245,7 +245,8 @@ function ProductCard({ product, lang, t, onInquire, isFeatured }) {
               color: 'var(--industrial-red)', 
               border: '1px solid var(--border-soft)',
               padding: '2px 6px',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              flexShrink: 0
             }}>
               ORIGIN: {product.material_origin}
             </span>
