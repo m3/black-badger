@@ -4,6 +4,7 @@ import productsData from './data/products.json';
 import { BlueprintGrid } from './components/BlueprintGrid';
 import { LabNote } from './components/LabNote';
 import { LumeToggle } from './components/LumeToggle';
+import { BlogSection } from './components/BlogSection';
 
 const translations = {
   sv: {
@@ -18,6 +19,7 @@ const translations = {
     navMaterials: "Material",
     navStudio: "Ateljé",
     navContact: "Kontakt",
+    navJournal: "Journal",
     
     colTag: "Konstnärliga Ringar",
     colTitle: "Materialkollektioner",
@@ -64,6 +66,7 @@ const translations = {
     navMaterials: "Materials",
     navStudio: "Studio",
     navContact: "Contact",
+    navJournal: "Journal",
     
     colTag: "Wearable Artifacts",
     colTitle: "Material Collections",
@@ -397,6 +400,7 @@ export default function App() {
               <li><a href="#home">{t.navHome}</a></li>
               <li><a href="#collections">{t.navCollections}</a></li>
               <li><a href="#watches">{t.navWatches}</a></li>
+              <li><a href="#journal">{t.navJournal}</a></li>
               <li><a href="#materials">{t.navMaterials}</a></li>
               <li><a href="#studio">{t.navStudio}</a></li>
               <li><a href="#contact">{t.navContact}</a></li>
@@ -563,6 +567,9 @@ export default function App() {
         </div>
       </section>
 
+      {/* Journal / Blog Section */}
+      <BlogSection lang={lang} />
+
       {/* Materials Tech Section */}
       <section id="materials" className="section">
         <div className="bb-container">
@@ -645,6 +652,7 @@ export default function App() {
               <li><a href="#home">{t.navHome}</a></li>
               <li><a href="#collections">{t.navCollections}</a></li>
               <li><a href="#watches">{t.navWatches}</a></li>
+              <li><a href="#journal">{t.navJournal}</a></li>
               <li><a href="#materials">{t.navMaterials}</a></li>
               <li><a href="#studio">{t.navStudio}</a></li>
               <li><a href="#contact">{t.navContact}</a></li>
