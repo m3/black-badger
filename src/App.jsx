@@ -309,6 +309,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [activeMaterial, setActiveMaterial] = useState('all');
   const [showInquiryModal, setShowInquiryModal] = useState(false);
+  const [showLabModal, setShowLabModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', size: '', material: 'damascus', msg: '' });
   const [inquirySent, setInquirySent] = useState(false);
 
@@ -641,6 +642,20 @@ export default function App() {
         </div>
         <div className="bb-container footer-bottom">
           <p>Copyright © 2026 Black Badger Design. {t.rights}</p>
+          <div 
+            className="footer-coord"
+            onClick={() => setShowLabModal(true)}
+            style={{ 
+              marginTop: '10px', 
+              fontSize: '0.65rem', 
+              fontFamily: 'var(--font-mono)', 
+              opacity: 0.4, 
+              cursor: 'pointer',
+              letterSpacing: '1px'
+            }}
+          >
+            [ ACCESS_LAB: 57.7089° N, 11.9746° E ]
+          </div>
         </div>
       </footer>
 
@@ -692,6 +707,81 @@ export default function App() {
                 <p className="modal-disclaimer">{t.inquiryDisclaimer}</p>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Secret Lab Easter Egg Modal */}
+      {showLabModal && (
+        <div className="inquiry-overlay" onClick={(e) => {
+          if (e.target.classList.contains('inquiry-overlay')) setShowLabModal(false);
+        }}>
+          <div className="inquiry-modal lab-modal" style={{ 
+            background: 'linear-gradient(135deg, #0a0a0a 0%, #151515 100%)',
+            border: '2px solid var(--industrial-red)',
+            position: 'relative',
+            overflow: 'hidden',
+            boxShadow: '0 0 40px rgba(255, 60, 60, 0.2)'
+          }}>
+            {/* Grainy Texture Overlay */}
+            <div style={{ 
+              position: 'absolute', 
+              inset: 0, 
+              opacity: 0.1, 
+              pointerEvents: 'none',
+              background: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")'
+            }}></div>
+            
+            <button className="btn-close-modal" onClick={() => setShowLabModal(false)} style={{ color: 'var(--industrial-red)' }}>×</button>
+            
+            <BlueprintGrid label="LAB_ARCHIVE: SECRET_ACCESS">
+              <div style={{ padding: '20px 0', textAlign: 'center' }}>
+                <img 
+                  src="/assets/instagram_reference/424459147_1114706066636587_397693242909840195_n.jpg" 
+                  alt="Material Secret" 
+                  style={{ 
+                    width: '100%', 
+                    maxHeight: '300px', 
+                    objectFit: 'cover', 
+                    filter: 'grayscale(0.5) contrast(1.2)',
+                    border: '1px solid rgba(255, 60, 60, 0.3)',
+                    marginBottom: '20px'
+                  }}
+                />
+                
+                <h2 style={{ 
+                  color: 'var(--industrial-red)', 
+                  fontFamily: 'var(--font-mono)', 
+                  fontSize: '1.2rem',
+                  letterSpacing: '2px',
+                  marginBottom: '15px'
+                }}>
+                  MATERIAL SECRETS REVEALED
+                </h2>
+                
+                <p style={{ 
+                  color: '#fff', 
+                  fontFamily: 'var(--font-mono)', 
+                  fontSize: '0.8rem',
+                  lineHeight: '1.6',
+                  textTransform: 'uppercase',
+                  opacity: 0.9
+                }}>
+                  BADGERITE DUST & CANADIAN OPTIMISM
+                </p>
+                
+                <div style={{ 
+                  marginTop: '30px', 
+                  paddingTop: '20px', 
+                  borderTop: '1px solid rgba(255, 60, 60, 0.2)',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.7rem',
+                  color: 'var(--industrial-red)'
+                }}>
+                  🇨🇦 STAMPED IN TITANIUM
+                </div>
+              </div>
+            </BlueprintGrid>
           </div>
         </div>
       )}
