@@ -1,56 +1,33 @@
 # Black Badger — Avant-Garde Materials & Luminous Industrial Jewelry
 
-An avant-garde, premium single-page digital platform for **Black Badger** (James Thompson's design studio, Gothenburg, Sweden), sculpted utilizing **Vite 8 + React 19 + Vanilla CSS**. 
+An avant-garde, premium single-page digital platform for **Black Badger** (James Thompson's design studio, Gothenburg, Sweden). The platform authentically represents the "Industrial Intellectual" brand, bridging the gap between a high-end art gallery and a raw industrial workshop.
 
-This repository replicates the high-speed static architecture of the *Port Arthur* project, tailored with a luxury industrial dark aesthetic, custom luminescent themes, dynamic bilingual (EN/SV) copy, and a fully parsed Shopify product catalog.
+Built with **Vite 8 + React 19 + Vanilla CSS**.
 
 👉 **GitHub Repository**: [https://github.com/m3/black-badger](https://github.com/m3/black-badger)
 
 ---
 
-## 1. Key Architectural Features
+## 1. Brand Identity & Goal
+The project transforms the digital presence of Black Badger using core brand pillars:
+* **High-Art Theory**: Objects treated as industrial history/sculptures with clean "Museum" spacing.
+* **Industrial Grit**: Authentic, technical, process-driven visuals.
+* **Industrial Wit**: Conversational "Lab Notes" that explain complex materials with warmth and humor.
 
-* **Real Shopify Catalog Integration**: Powered by real products scraped from the Shopify products endpoint. Data is structured locally inside `src/data/products.json`, featuring product descriptions, pricing, sizing matrices, availability states, and image lists.
-* **Premium Product Showcase**: Product grids with interactive filter tabs, visual image-swap on mouse hover, glowing availability pulses, responsive sizing pills, and smart inquiry form integration (pre-fills the build request form with the selected ring).
-* **Robust Multi-Lingual Sync**: Seamless bilingual switcher (English / Swedish) that persists dynamically across all sections, navigation buttons, specification grids, and form overlays. Document language metadata is automatically synchronized to prevent crawler crawl jumps.
-* **Dynamic Luminous Dual-Theme (with Pink Lume)**:
-  * **Dark Theme** (Default): Matte carbon backgrounds (`#0b0c0f`) combined with a vibrant Swiss Super-LumiNova powered neon Badgerite glow (`#10f3c1`).
-  * **Light Theme**: Brushed steel & titanium backgrounds (`#f2f4f7`) with a daytime teal pigmented core outline (`#02b396`).
-  * **Pink Theme**: Rose gold & blush backgrounds (`#0f0a0c`) with a warm, neon-pink luminous rose glow (`#ff6b9d`).
-* **Symmetrical Geometric SVG Logo**: Brand identity is built using a custom, high-end inline SVG badger face emblem. Using `stroke="currentColor"`, it adapts instantly and remains completely visible in all themes (charcoal in light, silver-white in dark).
-* **Zero Jitter Layout Stabilization**: Navigation grids, action bars, and logo linkages have pre-allocated dimensions to guarantee zero horizontal shifting (Cumulative Layout Shift) when toggling between Swedish and English characters.
-* **Glassmorphism Nav Backdrops**: Theme-specific translucent header backdrops resolve legacy transparent layout overlapping when scrolling.
-* **GitHub Actions Hetzner VPS CI/CD**: Automatic deployment workflow triggered on every push to the `main` branch, building and syncing static assets securely to your VPS via SSH.
+## 2. Core Technical Stack
+* **Vite 8**: High-speed, optimized build tooling.
+* **React 19**: Modern component architecture for a reactive user interface.
+* **Vanilla CSS**: Bespoke styling without heavy framework dependencies, utilizing custom properties and deep control over the design system.
 
----
+## 3. New UI Concepts
+The platform introduces several key user interface systems to support the narrative:
+* **BlueprintGrid**: A global layout wrapper inspired by industrial blueprints. It features a 30px base grid, 1px solid borders, and crosshairs (`+`) at intersections, complete with monospaced technical annotations.
+* **ProvenanceCards**: Rich, annotated product detail components that trace "The Billet Journey" from raw material to the finished object.
+* **LumeToggle**: An interactive Day/Night toggle component allowing users to view products under natural workshop lighting or long-exposure night shots highlighting the vibrant Badgerite glow.
 
-## 2. Project File Structure
+## 4. Local Development Setup
 
-```
-BlackBadger/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml        ← Automated GitHub Actions deployment pipeline (Hetzner VPS)
-├── .gitignore
-├── index.html                ← SEO headers, google fonts, JSON-LD structured business schema
-├── package.json              ← React 19, Vite 8, and npm script targets
-├── vite.config.js            ← Vite config layout
-├── public/
-│   └── assets/               ← Client-supplied brand images
-└── src/
-    ├── main.jsx              ← React entry mount
-    ├── App.jsx               ← Primary component layer, state machines, and ProductCard cards
-    ├── index.css             ← Responsive layouts, theme design tokens, and micro-interactions
-    └── data/
-        ├── collections.json  ← Bilingual category/material descriptions
-        └── products.json     ← Shopify-parsed catalog data
-```
-
----
-
-## 3. Local Development Setup
-
-To preview and edit the platform locally on your machine, follow these steps:
+To preview and edit the platform locally on your machine:
 
 ### A. Clone and Install Dependencies
 Ensure you have [Node.js](https://nodejs.org/) installed, then run:
@@ -69,39 +46,3 @@ Spin up the local development environment:
 npm run dev
 ```
 👉 **Interactive preview will be served at [http://localhost:5173/](http://localhost:5173/)** (with instant Hot Module Replacement).
-
-### C. Build Verification
-To compile the production-ready static bundle:
-```bash
-npm run build
-```
-The optimized bundle will compile inside `/dist` in under **300ms** with zero errors or warnings.
-
----
-
-## 4. Automated VPS Deployment Configuration
-
-To host the site under a subdomain (e.g. `blackbadger.runthetable.app`) on your **Hetzner VPS**, add the following credentials inside your GitHub repository settings under **Settings -> Secrets and variables -> Actions**:
-
-1. `HETZNER_SSH_KEY` — Your private SSH key authorizing secure rsync access.
-2. `HETZNER_VPS_IP` — The public IP address of your Hetzner VPS.
-3. `HETZNER_VPS_USER` — The SSH deployment user (typically `root`).
-4. `HETZNER_DEPLOY_PATH` — The directory on the VPS where the static files are hosted (e.g. `/var/www/blackbadger`).
-
-### VPS Nginx Configuration
-Create a server configuration block on the VPS to point Nginx to the deploy path:
-```nginx
-server {
-    listen 80;
-    listen [::]:80;
-    server_name blackbadger.runthetable.app;
-
-    root /var/www/blackbadger;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-```
-Secure the server block utilizing certbot: `certbot --nginx -d blackbadger.runthetable.app`
