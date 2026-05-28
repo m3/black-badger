@@ -1,9 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const LumeToggle = ({ isNight, onToggle }) => (
   <button 
     className={`lume-toggle ${isNight ? 'is-active' : ''}`} 
     onClick={onToggle}
+    aria-pressed={isNight}
+    aria-label="Toggle site lume mode"
     style={{
       background: isNight ? 'var(--lume-glow)' : 'transparent',
       color: isNight ? '#000' : 'var(--lume-glow)',
@@ -30,3 +33,8 @@ export const LumeToggle = ({ isNight, onToggle }) => (
     {isNight ? 'CHARGED' : 'EXPOSE'}
   </button>
 );
+
+LumeToggle.propTypes = {
+  isNight: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func.isRequired,
+};
