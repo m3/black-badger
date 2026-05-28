@@ -258,9 +258,9 @@ function ProductCard({ product, lang, t, onInquire, isFeatured }) {
         {product.lab_note && (
           <>
             {/* Connector between image and lab note */}
-            <div style={{ position: 'relative', height: '20px', marginLeft: '20px' }}>
-              <svg width="2" height="20" style={{ position: 'absolute', top: 0 }}>
-                <line x1="1" y1="0" x2="1" y2="20" stroke="var(--lume-glow)" strokeWidth="1" strokeDasharray="4 2" opacity="0.4" />
+            <div style={{ position: 'relative', height: '20px', marginLeft: '21px' }}>
+              <svg width="1" height="20" style={{ position: 'absolute', top: 0 }}>
+                <line x1="0" y1="0" x2="0" y2="20" stroke="var(--lume-glow)" strokeWidth="1" strokeDasharray="4 2" opacity="0.8" />
               </svg>
             </div>
             <LabNote note={product.lab_note} hasConnector />

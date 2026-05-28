@@ -4,8 +4,9 @@ export const LabNote = ({ note, hasConnector }) => (
   <div className="lab-note" style={{ 
     borderLeft: hasConnector ? '1px dashed var(--lume-glow)' : '2px solid #333', 
     paddingLeft: '15px', 
-    margin: '20px 0',
-    opacity: hasConnector ? 0.8 : 1
+    margin: hasConnector ? '0 0 20px 0' : '20px 0',
+    marginLeft: hasConnector ? '21px' : '0',
+    opacity: 0.8
   }}>
     <span className="note-label" style={{ 
       fontFamily: 'var(--font-mono)', 
