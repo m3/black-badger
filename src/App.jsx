@@ -236,7 +236,7 @@ const ProductCard = memo(({ product, lang, t, onInquire, isFeatured }) => {
       </div>
 
       <div className="product-card-body">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px', gap: '12px' }}>
           <h3 className="product-card-title">{product.title}</h3>
           {product.material_origin && (
             <span style={{ 
@@ -246,7 +246,10 @@ const ProductCard = memo(({ product, lang, t, onInquire, isFeatured }) => {
               border: '1px solid var(--border-soft)',
               padding: '2px 6px',
               textTransform: 'uppercase',
-              flexShrink: 0
+              maxWidth: '50%',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
               ORIGIN: {product.material_origin}
             </span>

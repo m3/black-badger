@@ -1084,6 +1084,7 @@ a {
 
 @media (min-width: 1025px) {
   .product-card.is-featured .product-image-wrapper {
+    flex: 0 0 50%;
     width: 50%;
     border-bottom: none;
     border-right: 1px solid var(--border-soft);
@@ -1140,7 +1141,9 @@ a {
   right: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
   pointer-events: none;
 }
 
@@ -1210,6 +1213,10 @@ a {
   color: var(--lume-glow);
   border: 1px solid var(--border-glow);
   backdrop-filter: blur(8px);
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 [data-theme="light"] .material-category-tag {
