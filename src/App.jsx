@@ -242,8 +242,8 @@ function ProductCard({ product, lang, t, onInquire }) {
             <span style={{ 
               fontFamily: 'var(--font-mono)', 
               fontSize: '0.6rem', 
-              color: 'var(--lume-glow)', 
-              border: '1px solid var(--lume-glow-dim)',
+              color: 'var(--industrial-red)', 
+              border: '1px solid var(--border-soft)',
               padding: '2px 6px',
               textTransform: 'uppercase'
             }}>
@@ -400,9 +400,9 @@ export default function App() {
                 position: 'absolute',
                 top: '-20px',
                 right: '0',
-                border: '2px solid var(--lume-glow)',
+                border: '2px solid var(--industrial-red)',
                 padding: '4px 10px',
-                color: 'var(--lume-glow)',
+                color: 'var(--industrial-red)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.7rem',
                 textTransform: 'uppercase',
