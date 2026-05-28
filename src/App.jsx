@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import collectionsData from './data/collections.json';
 import productsData from './data/products.json';
+import { BlueprintGrid } from './components/BlueprintGrid';
+import { LabNote } from './components/LabNote';
+import { LumeToggle } from './components/LumeToggle';
 
 const translations = {
   sv: {
@@ -186,15 +189,15 @@ const getProductMaterial = (product) => {
 // Premium E-commerce Product Card component
 function ProductCard({ product, lang, t, onInquire }) {
   const [hovered, setHovered] = useState(false);
-
-  // Hover image swap interaction
-  const hasMultipleImages = product.images && product.images.length > 1;
-  const currentImage = hasMultipleImages && hovered 
-    ? product.images[1] 
-    : product.images[0];
+  const [isNight, setIsNight] = useState(false);
 
   const matKey = getProductMaterial(product);
   const matName = collectionsData.materials.find(m => m.id === matKey)?.name[lang] || (lang === 'sv' ? 'Signaturutgåva' : 'Signature Edition');
+
+  // Image logic for "Billet Journey"
+  const dayImage = product.images[0];
+  const nightImage = product.lume_image || product.images[1] || product.images[0];
+  const currentDisplayImage = isNight ? nightImage : dayImage;
 
   return (
     <div 
@@ -202,13 +205,27 @@ function ProductCard({ product, lang, t, onInquire }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="product-image-wrapper">
+      <div className="product-image-wrapper blueprint-border" style={{ position: 'relative' }}>
+        <div className="corner-tl">+</div>
+        <div className="corner-tr">+</div>
+        <div className="corner-bl">+</div>
+        <div className="corner-br">+</div>
+        
         <img 
-          src={currentImage} 
+          src={currentDisplayImage} 
           alt={product.title} 
           className="product-image"
           loading="lazy"
+          style={{ filter: isNight ? 'brightness(1.2) contrast(1.1)' : 'none' }}
         />
+        
+        {/* Lume Toggle Overlay */}
+        {product.lume_image && (
+          <div style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 10 }}>
+            <LumeToggle isNight={isNight} onToggle={() => setIsNight(!isNight)} />
+          </div>
+        )}
+
         <div className="product-badge-group">
           <span className={`availability-tag ${product.available ? 'available' : 'commission'}`}>
             <span className="status-indicator-dot"></span>
@@ -218,10 +235,29 @@ function ProductCard({ product, lang, t, onInquire }) {
         </div>
       </div>
 
-      <div className="product-card-body">
-        <h3 className="product-card-title">{product.title}</h3>
+      <div className="product-card-body" style={{ paddingTop: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+          <h3 className="product-card-title">{product.title}</h3>
+          {product.material_origin && (
+            <span style={{ 
+              fontFamily: 'var(--font-mono)', 
+              fontSize: '0.6rem', 
+              color: 'var(--lume-glow)', 
+              border: '1px solid var(--lume-glow-dim)',
+              padding: '2px 6px',
+              textTransform: 'uppercase'
+            }}>
+              ORIGIN: {product.material_origin}
+            </span>
+          )}
+        </div>
+
         <p className="product-card-desc">{product.description}</p>
         
+        {product.lab_note && (
+          <LabNote note={product.lab_note} />
+        )}
+
         {product.sizes && product.sizes.length > 0 ? (
           <div className="product-sizes-section">
             <span className="sizes-title">{t.sizesLabel}:</span>
@@ -357,13 +393,36 @@ export default function App() {
       <section id="home" className="hero-section">
         <div className="hero-glow-orb"></div>
         <div className="bb-container hero-content">
-          <span className="hero-tagline">{t.tagline}</span>
-          <h1 className="hero-title">{t.title}</h1>
-          <p className="hero-subtitle">{t.subtitle}</p>
-          <div className="hero-ctas">
-            <a href="#collections" className="btn-glow">{t.viewBtn}</a>
-            <button className="btn-outline" onClick={() => setShowInquiryModal(true)}>{t.inquireBtn}</button>
-          </div>
+          <BlueprintGrid label="SECTION: HERO_01">
+            <div style={{ position: 'relative' }}>
+              {/* Industrial Stamp */}
+              <div style={{
+                position: 'absolute',
+                top: '-20px',
+                right: '0',
+                border: '2px solid var(--lume-glow)',
+                padding: '4px 10px',
+                color: 'var(--lume-glow)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.7rem',
+                textTransform: 'uppercase',
+                transform: 'rotate(5deg)',
+                opacity: 0.8,
+                pointerEvents: 'none',
+                zIndex: 5
+              }}>
+                GÖTEBORG via CANADA
+              </div>
+              
+              <span className="hero-tagline">{t.tagline}</span>
+              <h1 className="hero-title" style={{ fontFamily: 'var(--font-title)' }}>{t.title}</h1>
+              <p className="hero-subtitle">{t.subtitle}</p>
+              <div className="hero-ctas">
+                <a href="#collections" className="btn-glow">{t.viewBtn}</a>
+                <button className="btn-outline" onClick={() => setShowInquiryModal(true)}>{t.inquireBtn}</button>
+              </div>
+            </div>
+          </BlueprintGrid>
         </div>
       </section>
 
@@ -418,26 +477,28 @@ export default function App() {
           )}
 
           {/* Dynamic E-commerce Product Grid */}
-          <div className="products-grid">
-            {filteredProducts.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                lang={lang}
-                t={t}
-                onInquire={(productName) => {
-                  setFormData(prev => ({
-                    ...prev,
-                    material: getProductMaterial(product),
-                    msg: lang === 'sv'
-                      ? `Hej! Jag är intresserad av att beställa ringen "${productName}". Vänligen ge mig information om leveranstid och storlek.`
-                      : `Hi! I would like to inquire about ordering the "${productName}" ring. Please let me know the lead time and sizing details.`
-                  }));
-                  setShowInquiryModal(true);
-                }}
-              />
-            ))}
-          </div>
+          <BlueprintGrid label="SECTION: MATERIAL_LOGISTICS">
+            <div className="products-grid">
+              {filteredProducts.map(product => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  lang={lang}
+                  t={t}
+                  onInquire={(productName) => {
+                    setFormData(prev => ({
+                      ...prev,
+                      material: getProductMaterial(product),
+                      msg: lang === 'sv'
+                        ? `Hej! Jag är intresserad av att beställa ringen "${productName}". Vänligen ge mig information om leveranstid och storlek.`
+                        : `Hi! I would like to inquire about ordering the "${productName}" ring. Please let me know the lead time and sizing details.`
+                    }));
+                    setShowInquiryModal(true);
+                  }}
+                />
+              ))}
+            </div>
+          </BlueprintGrid>
 
           {/* No products placeholder (e.g. Superconductors) */}
           {filteredProducts.length === 0 && (
