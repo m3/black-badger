@@ -11,7 +11,7 @@ const translations = {
     title: "Black Badger",
     subtitle: "Nyskapande konstverk och industriella smycken tillverkade av avancerade kompositmaterial, damaskusstål, rymdindustri-kolfiber och vårt egna självlysande Badgerite-lume.",
     viewBtn: "Se kollektionen",
-    inquireBtn: "Skicka förfrågan",
+    inquireBtn: "STARTA BYGGE",
     navHome: "Hem",
     navCollections: "Kollektioner",
     navWatches: "Klockor",
@@ -35,7 +35,7 @@ const translations = {
     studioP1: "James Thompson grundade Black Badger i Göteborg och har blivit känd över hela världen som en pionjär inom avantgardistisk smyckesdesign och klockinnovation. Med en bakgrund inom industriell design och en djup fascination för materialvetenskap utforskar han ständigt gränserna för vad en ring kan tillverkas av.",
     studioP2: "Genom att samarbeta med de mest prestigefyllda oberoende klockmärkena som MB&F, Bamford och Sarpaneva, samt genom att utveckla unika material som lysande 'Badgerite' och återvinna F1-kolfiber, skapar Black Badger tidlösa föremål med en genuin historia.",
 
-    inquiryTitle: "Skräddarsydd Förfrågan",
+    inquiryTitle: "TEKNISK SPECIFIKATION",
     inquiryDesc: "Varje Black Badger-ring tillverkas på beställning i vår studio i Göteborg. Fyll i dina uppgifter nedan för att påbörja din beställning eller ställa frågor om storlek, material eller specialdesign.",
     inquiryDisclaimer: "Vi svarar normalt inom 48 timmar. Våra ringar skickas globalt med full försäkring.",
     
@@ -57,7 +57,7 @@ const translations = {
     title: "Black Badger",
     subtitle: "Avant-garde wearable art and industrial rings sculpted from advanced aerospace composites, Damascus steel, superconductors, and proprietary Badgerite luminous lume.",
     viewBtn: "View Collections",
-    inquireBtn: "Inquire Now",
+    inquireBtn: "INITIATE BUILD",
     navHome: "Home",
     navCollections: "Collections",
     navWatches: "Watches",
@@ -81,7 +81,7 @@ const translations = {
     studioP1: "Founded by Canadian designer James Thompson in Gothenburg, Black Badger has garnered international acclaim as a pioneer in avant-garde jewelry design and horological innovation. With a background in industrial design and a deep fascination with materials science, James constantly challenges what wearable art can be made from.",
     studioP2: "Collaborating with legendary watchmakers like MB&F, Bamford Watch Department, Sarpaneva, and Arcanaut, Black Badger combines aerospace titanium, Damascus steel, reclaimed Formula 1 components, and custom-engineered glow composites to make products that carry a profound narrative.",
 
-    inquiryTitle: "Custom Inquiry",
+    inquiryTitle: "TECHNICAL SPECIFICATION REQUEST",
     inquiryDesc: "Every Black Badger ring is individually crafted to order in our Gothenburg studio. Enter your details below to initiate your build, or ask questions about sizing, pricing, or custom material commissions.",
     inquiryDisclaimer: "Standard lead time is 4-6 weeks. We ship worldwide via secure express logistics.",
     
