@@ -39,24 +39,31 @@ body {
 .content-row.reverse { direction: rtl; }
 .content-row.reverse > * { direction: ltr; }
 
-.visual-panel {
+.visual {
   border: 1px solid var(--line);
   padding: 40px;
   background: rgba(255,255,255,0.02);
   position: relative;
 }
-.visual-panel img {
+.visual img {
   width: 100%;
   height: auto;
-  filter: brightness(0) invert(1) opacity(0.6);
+  filter: grayscale(0.2) contrast(1.1);
+  opacity: 0.9;
 }
-.visual-panel::before {
+.visual::before {
   content: 'FIG_01';
   position: absolute;
   top: 10px;
   left: 10px;
   font-size: 10px;
   color: var(--accent);
+}
+.visual-panel img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(0.2) contrast(1.1);
+  opacity: 0.9;
 }
 
 .text-panel h2 { font-size: 24px; text-transform: uppercase; margin-bottom: 24px; color: var(--accent); }
@@ -111,9 +118,9 @@ footer { padding: 40px 100px; border-top: 1px solid var(--line); margin-top: 100
   </div>
 
   <div class="content-row">
-    <div class="visual-panel">
-      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924" alt="Technical Drawing">
-    </div>
+    <div class="visual">
+          <img src="../mps9y8an-image.png" alt="Technical Drawing">
+        </div>
     <div class="text-panel">
       <h2>Technical Archeology</h2>
       <p>James Thompson doesn't just design jewelry; he excavates industrial history. By working with materials like Fordite—layers of compressed auto paint from Detroit—he treats every piece as a core sample of time.</p>
