@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — The Journal [Track 02]</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Iowan+Old+Style:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root {
+  --bg: #f5f0e8; /* Warm Paper */
+  --fg: #1a1714;
+  --muted: #8a7a68;
+  --accent: #8a6a3a; /* Metal Dust Gold */
+  --ink: #2a2420;
+  --serif: 'Iowan Old Style', 'Charter', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.texture-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 1000;
+}
+
+.nav {
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav .brand { font-family: var(--serif); font-size: 20px; font-weight: 700; text-decoration: none; color: var(--fg); }
+.nav .links a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.nav .links a.active { color: var(--fg); border-bottom: 1px solid var(--fg); }
+
+.hero {
+  padding: 0 60px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+.hero-text h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 6vw, 84px);
+  line-height: 1.05;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+.hero-text p { font-size: 18px; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
+.hero-image {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.hero-image img { width: 100%; display: block; }
+.hero-image .hand-note {
+  position: absolute;
+  bottom: 30px;
+  left: -20px;
+  background: #fff;
+  padding: 15px 25px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  box-shadow: 10px 10px 0 rgba(138,106,58,0.1);
+  transform: rotate(-2deg);
+}
+
+.journal-intro { padding: 120px 60px; background: #fff; text-align: center; }
+.journal-intro .container { max-width: 720px; margin: 0 auto; }
+.journal-intro h2 { font-family: var(--serif); font-size: 32px; margin-bottom: 30px; }
+.journal-intro p { font-size: 20px; line-height: 1.8; color: #4a4440; }
+
+.section { padding: 100px 60px; }
+.section-header { margin-bottom: 60px; display: flex; align-items: baseline; gap: 20px; }
+.section-header .date { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.section-header h3 { font-family: var(--serif); font-size: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.entry-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.entry-card { text-decoration: none; color: inherit; }
+.entry-img { aspect-ratio: 4/5; background: #e8e4dc; margin-bottom: 20px; border-radius: 2px; overflow: hidden; }
+.entry-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(0.1); }
+.entry-title { font-family: var(--serif); font-size: 20px; margin-bottom: 10px; }
+.entry-excerpt { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+footer { padding: 60px; border-top: 1px solid #e8e4dc; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; padding: 40px; }
+  .entry-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="texture-overlay"></div>
+
+<nav class="nav">
+  <a href="../index.html" class="brand">Black Badger.</a>
+  <div class="links">
+    <a href="index.html" class="active">Journal</a>
+    <a href="products.html">The Archive</a>
+    <a href="about.html">Workshop</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Diary of a <em>Maker</em>.</h1>
+      <p>Twenty years of metal dust, burnt fingertips, and the pursuit of materials that tell a story. This is the messy reality behind the rings.</p>
+      <a href="products.html" style="font-family: var(--mono); font-size: 11px; color: var(--fg); text-decoration: underline; letter-spacing: 0.1em;">BROWSE THE LOGBOOK</a>
+    </div>
+    <div class="hero-image">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_5166.jpg?v=1770908570" alt="Workshop">
+      <div class="hand-note">"Gothenburg. 2 AM. The forge is finally cooling down."</div>
+    </div>
+  </section>
+
+  <section class="journal-intro">
+    <div class="container">
+      <h2>The Forty Hour Week</h2>
+      <p>If Black Badger has a soul, it's in the forty hours it takes to turn a raw billet of Zirconium or a chunk of Detroit Fordite into something that breathes. We don't do 'easy' here.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="date">MAY.2025</span>
+      <h3>Recent Entries</h3>
+    </div>
+    <div class="entry-grid">
+      <a href="product.html?slug=20th-anniversary-ring" class="entry-card">
+        <div class="entry-img"><img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="R1 Piece"></div>
+        <h4 class="entry-title">The Anniversary Piece</h4>
+        <p class="entry-excerpt">Reflecting on two decades of work. This ring is the most honest thing I've ever made.</p>
+      </a>
+      <a href="products.html" class="entry-card">
+        <div class="entry-img"><img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7305_bc705bf7-fb14-4818-b8f8-3e98b186d1f2.jpg?v=1770910527" alt="Fordite"></div>
+        <h4 class="entry-title">Detroit Soul</h4>
+        <p class="entry-excerpt">Working with vintage Fordite. It smells like industrial optimism and 1950s paint shops.</p>
+      </a>
+      <a href="about.html" class="entry-card">
+        <div class="entry-img"><img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_5166.jpg?v=1770908570" alt="Workshop"></div>
+        <h4 class="entry-title">Gothenburg Studio</h4>
+        <p class="entry-excerpt">A peek inside the lab. Where the "Badgerite" magic actually happens.</p>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 BLACK BADGER GOT</p>
+  <p>STORY FIRST. STEEL SECOND.</p>
+</footer>
+
+</body>
+</html>

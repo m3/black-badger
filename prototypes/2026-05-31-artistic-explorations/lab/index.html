@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — The Lab [Track 03]</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+:root {
+  --bg: #fdf6f0; /* Sakura White */
+  --fg: #2a2020;
+  --primary: #c4708a; /* Sakura Pink */
+  --secondary: #8b70c4; /* Lavender */
+  --accent: #f0ddd5;
+  --ink: #1a1a1a;
+  --sans: 'Inter', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.halftone {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: radial-gradient(var(--primary) 1px, transparent 0);
+  background-size: 10px 10px;
+  z-index: 1000;
+}
+
+.nav {
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--ink);
+}
+.nav .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; color: var(--ink); text-decoration: none; letter-spacing: -0.05em; }
+.nav .logo span { color: var(--primary); }
+.nav .links a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.nav .links a.active { color: var(--primary); }
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 85vh;
+  border-bottom: 3px solid var(--ink);
+}
+.hero-visual {
+  background: linear-gradient(135deg, #f5e6e0, #fde2e4, #e8d5f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-right: 3px solid var(--ink);
+}
+.hero-visual img {
+  max-width: 80%;
+  height: auto;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+}
+.hero-visual .sfx {
+  position: absolute;
+  font-weight: 900;
+  font-size: 80px;
+  color: #fff;
+  text-shadow: 4px 4px 0 var(--ink);
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.hero-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+.hero-content .badge {
+  background: var(--ink);
+  color: #fff;
+  padding: 5px 15px;
+  font-family: var(--mono);
+  font-size: 10px;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 30px;
+}
+.hero-content h1 { font-size: clamp(48px, 6vw, 96px); font-weight: 900; line-height: 0.9; margin-bottom: 30px; text-transform: uppercase; letter-spacing: -0.06em; color: var(--ink); }
+.hero-content p { font-size: 18px; color: #6a5a5a; max-width: 440px; margin-bottom: 40px; }
+
+.section { padding: 100px 60px; border-bottom: 3px solid var(--ink); }
+.panel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.panel {
+  background: #fff;
+  border: 3px solid var(--ink);
+  padding: 30px;
+  position: relative;
+}
+.panel::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 100%;
+  height: 100%;
+  background: var(--ink);
+  z-index: -1;
+}
+.panel-num { font-family: var(--mono); font-size: 11px; color: var(--primary); margin-bottom: 15px; display: block; }
+.panel h3 { font-size: 20px; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; color: var(--ink); }
+.panel p { font-size: 14px; color: #6a5a5a; }
+
+.bubble {
+  max-width: 500px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 40px;
+  padding: 30px;
+  margin: 60px auto;
+  position: relative;
+  text-align: center;
+}
+.bubble p { font-size: 18px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid var(--ink);
+}
+
+footer { padding: 40px 60px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; font-weight: 600; }
+
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-visual { border-right: none; border-bottom: 3px solid var(--ink); min-height: 400px; }
+  .panel-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="halftone"></div>
+
+<nav class="nav">
+  <a href="../index.html" class="logo">Black<span>Badger</span></a>
+  <div class="links">
+    <a href="index.html" class="active">Episode.01</a>
+    <a href="products.html">Archive</a>
+    <a href="about.html">Universe</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-visual">
+      <span class="sfx" style="top: 10%; left: 10%;">G-GLOW!</span>
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="R1 Piece">
+      <span class="sfx" style="bottom: 10%; right: 10%;">SHHHH</span>
+    </div>
+    <div class="hero-content">
+      <span class="badge">CHAPTER 04 // THE LAB</span>
+      <h1>Universe of <em>Materials</em>.</h1>
+      <p>Objects that fell out of another world and landed on your finger. Welcome to the Black Badger Lab.</p>
+      <a href="products.html" style="background: var(--ink); color: #fff; text-decoration: none; padding: 15px 30px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; width: fit-content;">ENTER THE ARCHIVE</a>
+    </div>
+  </section>
+
+  <div class="bubble">
+    <p>"I don't think of myself as a jeweler. I'm a guy who likes to see what happens when you push a material to its absolute limit."</p>
+  </div>
+
+  <section class="section">
+    <div class="panel-grid">
+      <div class="panel">
+        <span class="panel-num">01.ORIGIN</span>
+        <h3>Project Sabotage</h3>
+        <p>The story of how a watch became a comic book, and how the materials wrote the plot.</p>
+      </div>
+      <div class="panel">
+        <span class="panel-num">02.MATTER</span>
+        <h3>Badgerite Power</h3>
+        <p>My own proprietary lume compound. It's what happens when you decide the watch industry isn't bright enough.</p>
+      </div>
+      <div class="panel">
+        <span class="panel-num">03.PROCESS</span>
+        <h3>The Alchemy</h3>
+        <p>Turning Fordite, Zirconium, and Damascus into physical artifacts of industrial optimism.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>BLACK BADGER LAB // GOT-2025</p>
+  <p>ALL SYSTEMS NOMINAL.</p>
+</footer>
+
+</body>
+</html>

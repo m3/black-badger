@@ -1,0 +1,491 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — The Material Gallery</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0f0d0a;--surface:#1a1714;--warm:#2a2420;--charcoal:#3a3632;
+--mid:#6a5e52;--sand:#8a7a68;--steel:#8a9aaa;--silver:#c0b8b0;
+--gold:#d4a843;--rose:#c4a0a8;--teal:#709090;--cream:#e0d8cc;
+}
+body{
+font-family:'Inter',-apple-system,sans-serif;
+background:var(--bg);color:var(--cream);
+font-size:15px;line-height:1.7;
+-webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:var(--bg)}
+
+/* ── NAV ── */
+nav{
+position:sticky;top:0;z-index:100;
+background:rgba(15,13,10,0.94);backdrop-filter:blur(12px);
+border-bottom:1px solid var(--charcoal);
+height:52px;display:flex;align-items:center;
+padding:0 32px;gap:32px;
+}
+nav .logo{font-family:'IBM Plex Mono',mono;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--cream);text-decoration:none}
+nav .logo span{color:var(--gold)}
+nav .links{display:flex;gap:24px;margin-left:auto}
+nav .links a{font-family:'IBM Plex Mono',mono;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s}
+nav .links a:hover,nav .links a.active{color:var(--gold)}
+
+/* ── HERO ── */
+.hero{
+min-height:92vh;display:flex;flex-direction:column;
+justify-content:flex-end;padding:0 0 60px;
+position:relative;overflow:hidden;
+}
+.hero .hero-img{
+position:absolute;inset:0;
+background:linear-gradient(160deg,var(--surface) 0%,var(--bg) 40%,#1a1510 100%);
+display:flex;align-items:center;justify-content:center;
+}
+.hero .hero-img .ring-display{
+width:320px;height:320px;border-radius:50%;
+background:radial-gradient(circle at 40% 35%,#4a4035 0%,#2a2420 40%,#1a1714 70%,#0f0d0a 100%);
+box-shadow:0 0 120px rgba(212,168,67,0.08),0 0 40px rgba(0,0,0,0.6);
+display:flex;align-items:center;justify-content:center;
+font-size:56px;color:var(--gold);opacity:0.9;
+position:relative;
+}
+.hero .hero-img .ring-display::before{
+content:'';position:absolute;inset:-20px;border-radius:50%;
+border:1px solid rgba(212,168,67,0.08);
+}
+.hero .hero-img .ring-display::after{
+content:'20';position:absolute;bottom:30%;font-family:'IBM Plex Mono',mono;
+font-size:11px;letter-spacing:0.14em;color:var(--mid);
+}
+.hero .hero-overlay{
+position:absolute;inset:0;
+background:linear-gradient(180deg,transparent 20%,var(--bg) 75%);
+}
+.hero .hero-content{
+position:relative;z-index:1;padding:0 48px;
+}
+.hero .hero-content .kicker{
+font-family:'IBM Plex Mono',mono;font-size:10px;
+letter-spacing:0.18em;text-transform:uppercase;
+color:var(--gold);margin-bottom:20px;
+}
+.hero .hero-content h1{
+font-size:clamp(44px,7vw,82px);font-weight:700;
+letter-spacing:-0.04em;line-height:1.02;
+margin-bottom:20px;
+}
+.hero .hero-content h1 em{font-style:italic;font-weight:400;color:var(--gold)}
+.hero .hero-content .subtitle{
+font-size:18px;color:var(--mid);max-width:480px;line-height:1.6;
+margin-bottom:32px;
+}
+.hero .hero-content .scroll-hint{
+font-family:'IBM Plex Mono',mono;font-size:10px;
+letter-spacing:0.12em;text-transform:uppercase;color:var(--charcoal);
+animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ── INTRO TEXT ── */
+.intro{padding:100px 48px;max-width:720px}
+.intro p{font-size:18px;line-height:1.8;color:var(--silver);margin-bottom:20px}
+.intro .drop-cap::first-letter{
+float:left;font-size:56px;line-height:0.8;font-weight:700;
+color:var(--gold);margin-right:8px;margin-top:6px;
+}
+
+/* ── MATERIAL CHAPTERS ── */
+.chapter{
+padding:80px 48px;
+border-top:1px solid var(--charcoal);
+}
+.chapter-header{
+display:flex;align-items:flex-end;gap:24px;
+margin-bottom:48px;flex-wrap:wrap;
+}
+.chapter-num{
+font-family:'IBM Plex Mono',mono;font-size:64px;
+font-weight:700;color:var(--charcoal);line-height:1;
+letter-spacing:-0.04em;
+}
+.chapter-header h2{
+font-size:32px;font-weight:700;letter-spacing:-0.02em;
+}
+.chapter-header h2 em{font-style:italic;font-weight:400;color:var(--gold)}
+.chapter-header .chapter-desc{
+font-size:14px;color:var(--mid);max-width:400px;margin-top:6px;
+}
+
+.chapter-grid{
+display:grid;grid-template-columns:repeat(12,1fr);
+gap:24px;
+}
+.chapter-grid .card{
+grid-column:span 6;
+background:var(--surface);border:1px solid var(--charcoal);
+border-radius:4px;overflow:hidden;
+transition:border-color 0.3s;
+}
+.chapter-grid .card:hover{border-color:var(--gold)}
+.chapter-grid .card .card-img{
+width:100%;aspect-ratio:4/3;background:var(--warm);
+display:flex;align-items:center;justify-content:center;
+font-size:40px;overflow:hidden;
+}
+.chapter-grid .card .card-img img{width:100%;height:100%;object-fit:cover}
+.chapter-grid .card .card-body{padding:24px}
+.chapter-grid .card .card-body .piece-name{
+font-size:18px;font-weight:700;margin-bottom:4px;
+}
+.chapter-grid .card .card-body .piece-mat{
+font-family:'IBM Plex Mono',mono;font-size:10px;
+letter-spacing:0.1em;text-transform:uppercase;
+color:var(--mid);margin-bottom:12px;
+}
+.chapter-grid .card .card-body p{
+font-size:14px;color:var(--sand);line-height:1.7;
+}
+.chapter-grid .card .card-body .lab-quote{
+margin-top:16px;padding-top:16px;
+border-top:1px solid var(--charcoal);
+font-size:13px;font-style:italic;color:var(--steel);
+line-height:1.6;
+}
+.chapter-grid .card .card-body .price{
+font-family:'IBM Plex Mono',mono;font-size:16px;
+color:var(--gold);font-weight:600;margin-top:16px;
+}
+
+/* ── FEATURED PIECE (full-width) ── */
+.featured{
+grid-column:span 12;
+display:grid;grid-template-columns:1.2fr 1fr;
+gap:0;background:var(--surface);
+border:1px solid var(--charcoal);border-radius:4px;
+overflow:hidden;
+}
+.featured .feat-img{
+background:linear-gradient(135deg,#2a2420,#1a1714);
+display:flex;align-items:center;justify-content:center;
+font-size:64px;min-height:400px;overflow:hidden;
+}
+.featured .feat-img img{width:100%;height:100%;object-fit:cover}
+.featured .feat-info{padding:40px;display:flex;flex-direction:column;justify-content:center}
+.featured .feat-info .feat-label{
+font-family:'IBM Plex Mono',mono;font-size:9px;
+letter-spacing:0.16em;text-transform:uppercase;
+color:var(--gold);margin-bottom:16px;
+}
+.featured .feat-info h2{font-size:36px;font-weight:700;line-height:1.1;margin-bottom:12px}
+.featured .feat-info h2 em{font-style:italic;font-weight:400;color:var(--gold)}
+.featured .feat-info .feat-mat{
+font-family:'IBM Plex Mono',mono;font-size:10px;
+letter-spacing:0.1em;text-transform:uppercase;
+color:var(--mid);margin-bottom:20px;
+}
+.featured .feat-info p{color:var(--sand);font-size:15px;line-height:1.7;margin-bottom:20px}
+.featured .feat-info .lab-note{
+border-left:2px solid var(--gold);padding-left:16px;
+font-size:14px;font-style:italic;color:var(--steel);
+line-height:1.6;margin-bottom:24px;
+}
+.featured .feat-info .feat-cta{
+display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.featured .feat-info .feat-cta .btn{
+background:transparent;border:1px solid var(--gold);
+color:var(--gold);padding:10px 20px;font-size:13px;
+font-weight:600;cursor:pointer;border-radius:4px;
+letter-spacing:0.03em;transition:all 0.2s;
+}
+.featured .feat-info .feat-cta .btn:hover{background:var(--gold);color:var(--bg)}
+.featured .feat-info .feat-cta .price{
+font-family:'IBM Plex Mono',mono;font-size:22px;
+color:var(--gold);font-weight:600;
+}
+
+/* ── MATERIAL ORIGIN ── */
+.origin-bar{
+display:flex;gap:40px;flex-wrap:wrap;
+margin-top:48px;padding-top:32px;
+border-top:1px solid var(--charcoal);
+}
+.origin-bar .origin-item{
+flex:1;min-width:160px;
+}
+.origin-bar .origin-item .origin-label{
+font-family:'IBM Plex Mono',mono;font-size:9px;
+letter-spacing:0.14em;text-transform:uppercase;
+color:var(--charcoal);margin-bottom:6px;
+}
+.origin-bar .origin-item .origin-val{
+font-size:14px;color:var(--silver);line-height:1.5;
+}
+
+/* ── JAMES NOTE ── */
+.james-note{
+padding:80px 48px;
+background:linear-gradient(180deg,var(--bg),var(--surface));
+border-top:1px solid var(--charcoal);
+}
+.james-note .note-inner{
+max-width:640px;margin:0 auto;text-align:center;
+}
+.james-note blockquote{
+font-size:clamp(22px,3vw,32px);
+font-weight:400;line-height:1.5;
+color:var(--cream);
+margin-bottom:20px;
+}
+.james-note blockquote em{color:var(--gold);font-style:italic}
+.james-note cite{
+font-family:'IBM Plex Mono',mono;font-size:11px;
+letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);
+}
+
+/* ── FOOTER ── */
+footer{
+padding:48px;border-top:1px solid var(--charcoal);
+display:flex;justify-content:space-between;align-items:center;
+flex-wrap:wrap;gap:24px;
+}
+footer .footer-brand{
+font-family:'IBM Plex Mono',mono;font-size:11px;
+letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);
+}
+footer .footer-brand span{color:var(--gold)}
+footer .footer-links{
+display:flex;gap:24px;
+font-family:'IBM Plex Mono',mono;font-size:10px;
+letter-spacing:0.1em;text-transform:uppercase;
+}
+footer .footer-links a{color:var(--mid);text-decoration:none}
+footer .footer-links a:hover{color:var(--cream)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:820px){
+nav{padding:0 20px;gap:16px}
+nav .links{gap:16px}
+.hero .hero-content{padding:0 24px}
+.intro{padding:60px 24px}
+.chapter{padding:48px 24px}
+.chapter-grid .card{grid-column:span 12}
+.featured{grid-template-columns:1fr}
+.featured .feat-img{min-height:280px}
+.featured .feat-info{padding:24px}
+.james-note{padding:48px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="#" class="logo">Black <span>Badger</span></a>
+<div class="links">
+<a href="#materials" class="active">Materials</a>
+<a href="#collection">Collection</a>
+<a href="#workshop">Workshop</a>
+</div>
+</nav>
+
+<!-- ════════════════════════════ -->
+<!-- HERO                         -->
+<!-- ════════════════════════════ -->
+<section class="hero">
+<div class="hero-img">
+<div class="ring-display">✦</div>
+</div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="kicker">Chapter 04 — The Material Gallery</div>
+<h1>Twenty Years of <em>Finding</em><br>the Extraordinary</h1>
+<p class="subtitle">Compressed auto paint. Meteorite. Damascus steel forged by hand. Zirconium that catches fire. Every ring tells the story of where it came from.</p>
+<div class="scroll-hint">↓ Scroll to explore</div>
+</div>
+</section>
+
+<!-- ════════════════════════════ -->
+<!-- INTRO                        -->
+<!-- ════════════════════════════ -->
+<section class="intro">
+<p class="drop-cap">It started with a conversation about materials that shouldn't exist. Fordite is what happens when you spray 80 years of car paint on the same wall in the same factory. Damascus is what happens when you fold steel 300 times by hand. Zirconium is what happens when you put a torch to a metal that doesn't want to sit still.</p>
+<p>I don't design rings. I find materials that have something to say, and then I get out of the way.</p>
+<p style="color:var(--gold);font-style:italic;margin-top:24px">— James Thompson, Black Badger</p>
+</section>
+
+<!-- ════════════════════════════ -->
+<!-- CHAPTER: FORDITE             -->
+<!-- ════════════════════════════ -->
+<section class="chapter" id="fordite">
+<div class="chapter-header">
+<div class="chapter-num">01</div>
+<div>
+<h2>Fordite — <em>Detroit's</em> Layered History</h2>
+<p class="chapter-desc">Compressed automotive paint from the Ford Rouge Factory. 80 years of color, pressed into stone. Each layer is a model year, a color trend, a moment when Detroit was the center of the world.</p>
+</div>
+</div>
+<div class="chapter-grid">
+<div class="card">
+<div class="card-img" style="background:linear-gradient(135deg,#c4732a,#e8a843,#d4684a,#3a2a1a);display:flex;align-items:center;justify-content:center">
+<div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#d4853a,#f0b853,#e0684a,#4a3020);box-shadow:0 4px 20px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(255,255,255,0.6)">✦</div>
+</div>
+<div class="card-body">
+<div class="piece-name">Fordite / Vintage Micarta</div>
+<div class="piece-mat">1940s Westinghouse / Ford Rouge Plant</div>
+<p>Fordite combined with an outer layer milled from 1940s Westinghouse Micarta. Used as an electrical insulator, comprised of layers of linen fabric impregnated with phenolic resin.</p>
+<div class="lab-quote">"Combined rare Fordite with Westinghouse Micarta from the 1940s. It smells like industrial optimism."</div>
+<div class="price">$900</div>
+</div>
+</div>
+<div class="card">
+<div class="card-img" style="background:linear-gradient(135deg,#3a4048,#6a7078,#4a5058,#2a3038);display:flex;align-items:center;justify-content:center">
+<div style="width:120px;height:120px;border-radius:50%;background:repeating-linear-gradient(45deg,#5a6068,#5a6068 3px,#4a5058 3px,#4a5058 6px);box-shadow:0 4px 20px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(255,255,255,0.6)">✦</div>
+</div>
+<div class="card-body">
+<div class="piece-name">Damascus Steel & Fordite</div>
+<div class="piece-mat">Chris Ploof Forge / Detroit Salvage</div>
+<p>One of our most popular designs. Patterned Damascus hand forged by Chris Ploof, paired with brilliantly colored Fordite from Detroit's auto factories.</p>
+<div class="lab-quote">"Chris Ploof forged this Damascus for me. The Fordite adds the soul of old Detroit."</div>
+<div class="price">$1,500</div>
+</div>
+</div>
+</div>
+<div class="origin-bar">
+<div class="origin-item"><div class="origin-label">Origin</div><div class="origin-val">Ford Rouge Plant, Dearborn, Michigan</div></div>
+<div class="origin-item"><div class="origin-label">Age</div><div class="origin-val">50–80 years of accumulated paint layers</div></div>
+<div class="origin-item"><div class="origin-label">Why it Matters</div><div class="origin-val">No longer produced. Modern EPA regulations made Fordite extinct.</div></div>
+</div>
+</section>
+
+<!-- ════════════════════════════ -->
+<!-- CHAPTER: DAMASCUS            -->
+<!-- ════════════════════════════ -->
+<section class="chapter" id="damascus">
+<div class="chapter-header">
+<div class="chapter-num">02</div>
+<div>
+<h2>Damascus — <em>300 Folds</em> of Steel</h2>
+<p class="chapter-desc">Hand-forged by Chris Ploof. Each billet is folded, hammered, and folded again. The pattern you see is the history of that process — every hammer blow preserved in the grain.</p>
+</div>
+</div>
+<div class="chapter-grid">
+<div class="featured">
+<div class="feat-img">
+<div style="width:100%;height:100%;background:repeating-conic-gradient(#6a7080 0% 25%,#4a5060 0% 50%) 0 0 / 20px 20px,linear-gradient(135deg,#7a8090,#5a6070);"></div>
+</div>
+<div class="feat-info">
+<div class="feat-label">Featured Piece</div>
+<h2>Bluetongue <em>&</em> Zirconium</h2>
+<div class="feat-mat">Damasteel AB / Flame-Oxidized Zirconium</div>
+<p>An instant favorite. Combines an inner of flame-oxidized Zirconium with an outer milled from Damasteel's Bluetongue® Damascus steel pattern.</p>
+<div class="lab-note">"Acid-etching the Bluetongue pattern reveals concentric circles that look like topographical maps of a cool planet."</div>
+<div class="feat-cta">
+<button class="btn">Inquire</button>
+<div class="price">$1,800</div>
+</div>
+</div>
+</div>
+</div>
+<div class="origin-bar">
+<div class="origin-item"><div class="origin-label">Forged By</div><div class="origin-val">Chris Ploof, New England</div></div>
+<div class="origin-item"><div class="origin-label">Pattern</div><div class="origin-val">Damasteel Bluetongue® stainless Damascus</div></div>
+<div class="origin-item"><div class="origin-label">Process</div><div class="origin-val">300+ folds, hand-hammered, acid-etched</div></div>
+</div>
+</section>
+
+<!-- ════════════════════════════ -->
+<!-- CHAPTER: ZIRCONIUM           -->
+<!-- ════════════════════════════ -->
+<section class="chapter" id="zirconium">
+<div class="chapter-header">
+<div class="chapter-num">03</div>
+<div>
+<h2>Zirconium — <em>Painting</em> With Fire</h2>
+<p class="chapter-desc">A reactive metal that changes color under heat. It's like painting with fire — the torch decides what color each surface becomes. No two pieces are identical.</p>
+</div>
+</div>
+<div class="chapter-grid">
+<div class="card">
+<div class="card-img" style="background:linear-gradient(135deg,#1a1a1a,#3a3a3a,#2a2a2a,#0a0a0a);display:flex;align-items:center;justify-content:center">
+<div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#2a2a2a,#4a4a4a,#3a3a3a,#1a1a1a);box-shadow:inset 0 0 30px rgba(212,168,67,0.15),0 4px 20px rgba(0,0,0,0.5);border:2px solid #5a5a5a;display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(212,168,67,0.6)">✦</div>
+</div>
+<div class="card-body">
+<div class="piece-name">Zirc Pawprint Dogtag</div>
+<div class="piece-mat">Solid Zirconium / Pat Pruitt Collab</div>
+<p>FINALLY available to the public! Milled from solid Zirconium metal (blowtorched black) with tech hex background patterning and deep engraved Black Badger logo.</p>
+<div class="lab-quote">"Zirconium behaves differently under a torch—it's like painting with fire."</div>
+<div class="price">$400</div>
+</div>
+</div>
+<div class="card">
+<div class="card-img" style="background:linear-gradient(135deg,#2a3a5a,#3a4a6a,#2a3a5a,#1a2a4a);display:flex;align-items:center;justify-content:center">
+<div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#2a4a6a,#4a6a8a,#3a5a7a,#1a3a5a);box-shadow:inset 0 0 30px rgba(100,160,210,0.2),0 4px 20px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(255,255,255,0.5)">✦</div>
+</div>
+<div class="card-body">
+<div class="piece-name">The TvåBlå Ring</div>
+<div class="piece-mat">Damasteel Bluetongue / Swedish Zirconium</div>
+<p>TvåBlå means "two blue" in Swedish. A close cousin to the Bluetongue® and Zirconium ring, featuring a brilliant blue interior.</p>
+<div class="lab-quote">"It's a Swedish pun, and if you don't get it, I'll show myself out."</div>
+<div class="price">$1,800</div>
+</div>
+</div>
+</div>
+<div class="origin-bar">
+<div class="origin-item"><div class="origin-label">Material</div><div class="origin-val">Grade 702 Zirconium alloy</div></div>
+<div class="origin-item"><div class="origin-label">Process</div><div class="origin-val">Torch-oxidized: heat creates the color</div></div>
+<div class="origin-item"><div class="origin-label">Unique Property</div><div class="origin-val">Develops a living patina over time — the ring ages with you</div></div>
+</div>
+</section>
+
+<!-- ════════════════════════════ -->
+<!-- CHAPTER: FEATURED             -->
+<!-- ════════════════════════════ -->
+<section class="chapter" id="featured" style="padding:0">
+<div class="chapter-grid" style="gap:0">
+<div class="featured" style="border:none;border-top:1px solid var(--charcoal)">
+<div class="feat-img" style="background:linear-gradient(135deg,#2a2420,#1a1714,#0f0d0a)">
+<div style="width:180px;height:180px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8a7a60 0%,#5a4a3a 30%,#3a2a1a 60%,#1a1510 100%);box-shadow:0 0 80px rgba(212,168,67,0.12),0 8px 32px rgba(0,0,0,0.5);"></div>
+</div>
+<div class="feat-info" style="background:var(--surface)">
+<div class="feat-label">✦ The Masterwork</div>
+<h2>The 20th <em>Anniversary</em> Ring</h2>
+<div class="feat-mat">Proprietary Composite / 20 Years of R&D</div>
+<p>It's been 20 years since I started Black Badger! From fun little objects to a highly innovative contributor to the Swiss watch industry. This ring is the culmination of everything I've learned.</p>
+<div class="lab-note">"Two decades of smelling like a machine shop distilled into one ring. It's not just jewelry; it's a timeline."</div>
+<div class="feat-cta">
+<button class="btn">Inquire</button>
+<div class="price">$2,000</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ════════════════════════════ -->
+<!-- JAMES NOTE                   -->
+<!-- ════════════════════════════ -->
+<section class="james-note">
+<div class="note-inner">
+<blockquote>
+Every material I work with has a <em>provenance</em> — a story about where it came from and why it exists. Fordite is Detroit's industrial archaeology. Damascus is 300 folds of human patience. Zirconium is a metal that <em>wants</em> to change. My job isn't to design rings. It's to find materials that have something to say, and then get out of the way.
+</blockquote>
+<cite>— James Thompson, Gothenburg, Sweden</cite>
+</div>
+</section>
+
+<footer>
+<div class="footer-brand">Black <span>Badger</span> × Since 2004</div>
+<div class="footer-links">
+<a href="#">Instagram</a>
+<a href="#">Contact</a>
+<a href="#">Press</a>
+</div>
+</footer>
+
+</body>
+</html>

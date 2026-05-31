@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackBadger — Visual Direction Options</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: #f5f5f0;
+  color: #1a1a1a;
+  padding: 40px 24px 80px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* ── Card shell ── */
+.direction-card {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+/* ── Direction: Dark Editorial ── */
+.de {
+  --bg: #0a0b0f;
+  --surface: #111218;
+  --fg: #f0efe8;
+  --muted: #808090;
+  --border: #1a1b24;
+  --accent: #6ee7b7;
+  --accent-dim: rgba(110,231,183,.12);
+  --font-d: 'Space Grotesk', 'Söhne', sans-serif;
+  --font-b: 'Inter', system-ui, sans-serif;
+}
+.de .d-header { padding: 28px 28px 0; background: var(--bg); }
+.de .d-label {
+  font-family: var(--font-d); font-size: 22px; font-weight: 600;
+  color: var(--fg); letter-spacing: -0.01em;
+}
+.de .d-refs { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.de .d-mood { font-family: var(--font-b); font-size: 12px; color: var(--muted); margin-top: 12px; padding-bottom: 20px; line-height: 1.6; border-bottom: 1px solid var(--border); }
+
+/* palettes */
+.pal-row { display: flex; height: 32px; }
+.pal-row span { flex: 1; }
+
+/* type sample */
+.type-sample { padding: 20px 28px; background: var(--surface); }
+.type-sample .display { font-family: var(--font-d); font-size: 32px; color: var(--fg); letter-spacing: -0.02em; }
+.type-sample .body { font-family: var(--font-b); font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+/* buttons */
+.btn-row { display: flex; gap: 10px; padding: 16px 28px; background: var(--bg); }
+.btn {
+  display: inline-block; padding: 8px 18px; border-radius: 2px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.btn-primary { background: var(--accent); color: var(--bg); border: none; }
+.btn-ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+
+/* mini product card */
+.mini-card { margin: 0 28px 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+.mini-card .img { height: 140px; background: linear-gradient(135deg, #1a1b24 0%, #0a0b0f 100%); position: relative; }
+.mini-card .img::after { content: "✦"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 40px; color: var(--accent); opacity: .3; }
+.mini-card .info { padding: 14px; }
+.mini-card .name { font-family: var(--font-d); font-size: 15px; font-weight: 600; color: var(--fg); }
+.mini-card .price { font-family: var(--font-b); font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: 500; }
+.mini-card .tag { font-family: var(--font-b); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 6px; }
+
+/* ── Direction: Warm Gallery ── */
+.wg {
+  --bg: #2a2420;
+  --surface: #342d28;
+  --fg: #f0ebe3;
+  --muted: #908070;
+  --border: #3d3530;
+  --accent: #d4a853;
+  --accent-dim: rgba(212,168,83,.12);
+  --font-d: 'Iowan Old Style', Georgia, serif;
+  --font-b: 'Inter', system-ui, sans-serif;
+}
+.wg .d-header { padding: 28px 28px 0; background: var(--bg); }
+.wg .d-label { font-family: var(--font-d); font-size: 22px; font-weight: 700; color: var(--fg); }
+.wg .d-refs { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.wg .d-mood { font-family: var(--font-b); font-size: 12px; color: var(--muted); margin-top: 12px; padding-bottom: 20px; line-height: 1.6; border-bottom: 1px solid var(--border); }
+.wg .type-sample { padding: 20px 28px; background: var(--surface); }
+.wg .type-sample .display { font-family: var(--font-d); font-size: 32px; color: var(--fg); }
+.wg .type-sample .body { font-family: var(--font-b); font-size: 13px; color: var(--muted); margin-top: 8px; }
+.wg .btn-row { display: flex; gap: 10px; padding: 16px 28px; background: var(--bg); }
+.wg .btn-primary { background: var(--accent); color: var(--bg); border: none; }
+.wg .btn-ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.wg .mini-card { margin: 0 28px 28px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.wg .mini-card .img { height: 140px; background: linear-gradient(135deg, #3d3530 0%, #2a2420 100%); position: relative; }
+.wg .mini-card .img::after { content: "◆"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 36px; color: var(--accent); opacity: .3; }
+.wg .mini-card .info { padding: 14px; }
+.wg .mini-card .name { font-family: var(--font-d); font-size: 15px; font-weight: 700; color: var(--fg); }
+.wg .mini-card .price { font-family: var(--font-b); font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: 500; }
+.wg .mini-card .tag { font-family: var(--font-b); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 6px; }
+
+/* ── Direction: Brutalist Shop ── */
+.bs {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --fg: #0c0c0c;
+  --muted: #606060;
+  --border: #0c0c0c;
+  --accent: #e03010;
+  --accent-dim: rgba(224,48,16,.1);
+  --font-d: 'JetBrains Mono', ui-monospace, monospace;
+  --font-b: 'JetBrains Mono', ui-monospace, monospace;
+}
+.bs .d-header { padding: 28px 28px 0; background: var(--bg); border-bottom: 2px solid var(--border); }
+.bs .d-label { font-family: var(--font-d); font-size: 18px; font-weight: 700; color: var(--fg); text-transform: uppercase; letter-spacing: .04em; }
+.bs .d-refs { font-family: var(--font-b); font-size: 11px; color: var(--muted); margin-top: 4px; }
+.bs .d-mood { font-family: var(--font-b); font-size: 12px; color: var(--muted); margin-top: 12px; padding-bottom: 20px; line-height: 1.6; }
+.bs .type-sample { padding: 20px 28px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.bs .type-sample .display { font-family: var(--font-d); font-size: 28px; color: var(--fg); font-weight: 700; }
+.bs .type-sample .body { font-family: var(--font-b); font-size: 12px; color: var(--muted); margin-top: 8px; }
+.bs .btn-row { display: flex; gap: 10px; padding: 16px 28px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.bs .btn { border-radius: 0; font-family: var(--font-d); font-size: 12px; text-transform: uppercase; padding: 8px 18px; }
+.bs .btn-primary { background: var(--fg); color: var(--bg); border: 2px solid var(--fg); }
+.bs .btn-ghost { background: transparent; color: var(--fg); border: 2px solid var(--fg); }
+.bs .mini-card { margin: 0 28px 28px; background: var(--surface); border: 2px solid var(--border); border-radius: 0; overflow: hidden; }
+.bs .mini-card .img { height: 140px; background: var(--border); position: relative; }
+.bs .mini-card .img::after { content: "■"; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 40px; color: #e0e0e0; }
+.bs .mini-card .info { padding: 14px; border-top: 2px solid var(--border); }
+.bs .mini-card .name { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--fg); text-transform: uppercase; }
+.bs .mini-card .price { font-family: var(--font-b); font-size: 13px; color: var(--accent); margin-top: 4px; font-weight: 700; }
+.bs .mini-card .tag { font-family: var(--font-b); font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+/* bottom label */
+.pick-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #fff; border-top: 1px solid #ddd;
+  padding: 14px 24px; display: flex; gap: 12px; align-items: center;
+  font-size: 13px; color: #555;
+  z-index: 10;
+}
+.pick-bar strong { color: #1a1a1a; }
+</style>
+</head>
+<body>
+
+<h1>Black Badger — Visual Direction Options</h1>
+<p class="subtitle">Three directions for the storefront. Each puts the product at the center — the difference is <em>how</em>. Scroll through the details, then pick one.</p>
+
+<div class="grid">
+
+  <!-- ════════ DIRECTION 1: DARK EDITORIAL ════════ -->
+  <div class="direction-card de" style="background: var(--bg);">
+    <div class="d-header">
+      <div class="d-label">Dark Editorial</div>
+      <div class="d-refs">Hypebeast · A-COLD-WALL* · SSENSE</div>
+      <div class="d-mood">Keeps the dark industrial base but ditches the blueprint grid. Products shown large, almost full-bleed, with museum-style captions. Hero is a single dramatic product shot with minimal text overlay.</div>
+    </div>
+    <!-- Palette -->
+    <div class="pal-row" style="padding: 0 28px; background: var(--bg);">
+      <span style="background: #0a0b0f; border: 1px solid var(--border);"></span>
+      <span style="background: #111218;"></span>
+      <span style="background: #f0efe8;"></span>
+      <span style="background: #6ee7b7;"></span>
+      <span style="background: #808090;"></span>
+    </div>
+    <!-- Type -->
+    <div class="type-sample">
+      <div class="display">RING_031</div>
+      <div class="body">Merino Fordite · 18k rose · Edition of 12</div>
+    </div>
+    <!-- Buttons -->
+    <div class="btn-row">
+      <span class="btn btn-primary">Inquire</span>
+      <span class="btn btn-ghost">View Details</span>
+    </div>
+    <!-- Mini product card -->
+    <div class="mini-card">
+      <div class="img"></div>
+      <div class="info">
+        <div class="name">Ring_047</div>
+        <div class="price">€ 3,200</div>
+        <div class="tag">Fordite · Titanium</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ DIRECTION 2: WARM GALLERY ════════ -->
+  <div class="direction-card wg" style="background: var(--bg);">
+    <div class="d-header">
+      <div class="d-label">Warm Gallery</div>
+      <div class="d-refs">Barena · Apiece Apart · Coyuchi</div>
+      <div class="d-mood">Warms up significantly. Dark charcoal with muted gold accent referencing workshop lighting and Fordite's warm tones. Product photography is hero-sized. Feels like walking into James's actual studio.</div>
+    </div>
+    <!-- Palette -->
+    <div class="pal-row" style="padding: 0 28px; background: var(--bg);">
+      <span style="background: #2a2420; border: 1px solid var(--border);"></span>
+      <span style="background: #342d28;"></span>
+      <span style="background: #f0ebe3;"></span>
+      <span style="background: #d4a853;"></span>
+      <span style="background: #908070;"></span>
+    </div>
+    <!-- Type -->
+    <div class="type-sample">
+      <div class="display">RING_031</div>
+      <div class="body">Merino Fordite · 18k rose · Edition of 12</div>
+    </div>
+    <!-- Buttons -->
+    <div class="btn-row">
+      <span class="btn btn-primary">Inquire</span>
+      <span class="btn btn-ghost">View Details</span>
+    </div>
+    <!-- Mini product card -->
+    <div class="mini-card">
+      <div class="img"></div>
+      <div class="info">
+        <div class="name">Ring_047</div>
+        <div class="price">€ 3,200</div>
+        <div class="tag">Fordite · Titanium</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ DIRECTION 3: BRUTALIST SHOP ════════ -->
+  <div class="direction-card bs" style="background: var(--bg);">
+    <div class="d-header">
+      <div class="d-label">Brutalist Shop</div>
+      <div class="d-refs">Are.na · Read.cv · Bring a Trailer</div>
+      <div class="d-mood">Strips all decorative chrome. Monospace type, hard edges, visible structure. Products dominate in a dense grid with technical specs inline. Zero fluff.</div>
+    </div>
+    <!-- Palette -->
+    <div class="pal-row" style="padding: 0 28px; background: var(--bg);">
+      <span style="background: #f5f4f0; border: 2px solid var(--border);"></span>
+      <span style="background: #ffffff;"></span>
+      <span style="background: #0c0c0c;"></span>
+      <span style="background: #e03010;"></span>
+      <span style="background: #606060;"></span>
+    </div>
+    <!-- Type -->
+    <div class="type-sample">
+      <div class="display">RING_031</div>
+      <div class="body">Merino Fordite · 18k rose · Edition of 12</div>
+    </div>
+    <!-- Buttons -->
+    <div class="btn-row">
+      <span class="btn btn-primary">INQUIRE</span>
+      <span class="btn btn-ghost">DETAILS</span>
+    </div>
+    <!-- Mini product card -->
+    <div class="mini-card">
+      <div class="img"></div>
+      <div class="info">
+        <div class="name">RING_047</div>
+        <div class="price">€ 3,200</div>
+        <div class="tag">Fordite · Titanium</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pick-bar">
+  <strong>→ Which direction speaks to you?</strong>&nbsp;&nbsp;
+  Dark Editorial picks up from where you are now and adds polish.&nbsp;
+  Warm Gallery humanizes the brand.&nbsp;
+  Brutalist Shop strips it to raw product.
+</div>
+
+</body>
+</html>

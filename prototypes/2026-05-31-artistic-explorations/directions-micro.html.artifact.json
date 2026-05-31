@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "Three Radical Directions — MicroMilSpec-Inspired",
+  "entry": "directions-micro.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-05-29T20:09:35.603Z",
+  "updatedAt": "2026-05-29T20:09:35.619Z",
+  "sourceSkillId": "agent-browser",
+  "designSystemId": "default",
+  "metadata": {
+    "identifier": "directions-micro",
+    "artifactType": "text/html",
+    "inferred": false
+  }
+}

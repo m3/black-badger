@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — The Archive [Track 01]</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+:root {
+  --bg: #002b5c; /* Blueprint Blue */
+  --fg: #ffffff;
+  --muted: #4d88ff;
+  --accent: #ffcc00; /* Technical Yellow */
+  --grid: rgba(255, 255, 255, 0.1);
+  --line: rgba(255, 255, 255, 0.3);
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--fg);
+  background-image: 
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  overflow-x: hidden;
+}
+.border-overlay {
+  position: fixed;
+  inset: 0;
+  border: 1px solid var(--line);
+  margin: 20px;
+  pointer-events: none;
+  z-index: 100;
+}
+.nav {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav .logo {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  color: var(--fg);
+}
+.nav .links a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.nav .links a:hover, .nav .links a.active { color: var(--fg); }
+
+.hero {
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  padding: 0 100px;
+  position: relative;
+}
+.hero-content { width: 40%; z-index: 2; }
+.hero-content .kicker { color: var(--accent); margin-bottom: 20px; font-size: 12px; font-weight: 600; }
+.hero-content h1 { font-size: 64px; line-height: 1; margin-bottom: 30px; text-transform: uppercase; letter-spacing: -0.05em; }
+.hero-content p { color: var(--muted); line-height: 1.6; margin-bottom: 40px; }
+.hero-visual {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-visual img {
+  max-width: 90%;
+  height: auto;
+  filter: brightness(0) invert(1) opacity(0.8);
+  mix-blend-mode: lighten;
+}
+.hero-visual .overlay-dims {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.dim-line {
+  position: absolute;
+  background: var(--line);
+}
+.dim-line.v { width: 1px; height: 100px; }
+.dim-line.h { height: 1px; width: 100px; }
+.dim-text {
+  position: absolute;
+  font-size: 10px;
+  color: var(--line);
+  white-space: nowrap;
+}
+
+.section { padding: 100px; border-top: 1px solid var(--line); }
+.section-header { margin-bottom: 60px; }
+.section-header .num { color: var(--accent); display: block; margin-bottom: 10px; }
+.section-header h2 { font-size: 32px; text-transform: uppercase; }
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.track-card {
+  border: 1px solid var(--line);
+  padding: 30px;
+  transition: background 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.track-card:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); }
+.track-card .label { font-size: 10px; color: var(--accent); margin-bottom: 20px; display: block; }
+.track-card h3 { font-size: 18px; margin-bottom: 15px; text-transform: uppercase; }
+.track-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+footer { padding: 40px 100px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+
+@media (max-width: 1024px) {
+  .hero { flex-direction: column; padding: 40px; height: auto; }
+  .hero-content, .hero-visual { width: 100%; position: static; transform: none; }
+  .hero-visual { margin-top: 60px; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .section { padding: 40px; }
+}
+</style>
+</head>
+<body>
+<div class="border-overlay"></div>
+
+<nav class="nav">
+  <a href="../index.html" class="logo">Black<span>Badger</span></a>
+  <div class="links">
+    <a href="index.html" class="active">Archive</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="kicker">SYSTEM.R1 // 20TH ANNIVERSARY</p>
+      <h1>The Archive</h1>
+      <p>A repository of technical explorations, metallurgical blueprints, and industrial artifacts. Every piece documented, from sketch to steel.</p>
+      <a href="products.html" style="color: var(--accent); text-decoration: none; border: 1px solid var(--accent); padding: 12px 24px; font-size: 12px; font-weight: 600;">EXPLORE DATASET</a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924" alt="Technical Archive">
+      <div class="overlay-dims">
+        <div class="dim-line h" style="top: 20%; left: 10%;"></div>
+        <div class="dim-text" style="top: 18%; left: 12%;">⌀ 21.5mm</div>
+        <div class="dim-line v" style="top: 40%; right: 20%;"></div>
+        <div class="dim-text" style="top: 45%; right: 15%; transform: rotate(90deg);">ALLOY.BA7</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="num">01 // TRACKS</span>
+      <h2>Visual Exploration</h2>
+    </div>
+    <div class="grid-3">
+      <a href="products.html" class="track-card">
+        <span class="label">R1.CATALOG</span>
+        <h3>Technical Dataset</h3>
+        <p>The complete listing of all rings and artifacts, presented as engineering schematics.</p>
+      </a>
+      <a href="about.html" class="track-card">
+        <span class="label">R1.STUDIO</span>
+        <h3>Engineering Mind</h3>
+        <p>The philosophy of James Thompson. Technical archeology and the pursuit of honest materials.</p>
+      </a>
+      <a href="product.html?slug=20th-anniversary-ring" class="track-card">
+        <span class="label">R1.SPECIMEN</span>
+        <h3>The Anniversary Ring</h3>
+        <p>A deep dive into the R1 system. The blueprint that started it all.</p>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>BLACK BADGER // GOT-2025</p>
+  <p>ALLOY.DOC V.4.0</p>
+</footer>
+
+</body>
+</html>

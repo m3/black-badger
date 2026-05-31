@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — Artistic Directions</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Iowan+Old+Style:ital,wght@0,700;1,400&family=Inter:wght@400;900&family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #0c0b0a;
+  --fg: #e8e4dc;
+  --accent: #c9a84c;
+  --blue: #002b5c;
+  --rose: #c4708a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── ARTISTIC OVERLAY ── */
+.sketch-bg {
+  position: fixed;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url('https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1) invert(1);
+}
+
+.welcome-header {
+  position: relative;
+  z-index: 1;
+  padding: 120px 40px 60px;
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-header .pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: block;
+  letter-spacing: 0.3em;
+}
+
+.welcome-header h1 {
+  font-family: 'Iowan Old Style', serif;
+  font-size: clamp(40px, 8vw, 84px);
+  margin-bottom: 30px;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.welcome-header h1 span {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  padding-left: 10%;
+}
+
+.welcome-header .intro-text {
+  font-size: 20px;
+  color: #8a8478;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: 60px;
+  border-left: 2px solid var(--accent);
+  padding-left: 30px;
+}
+
+.universe {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: #1a1714;
+  width: 100%;
+}
+
+.track {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px;
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.track:hover {
+  flex-grow: 1.2;
+}
+
+.track .bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: transform 1s ease;
+}
+
+.track:hover .bg-img {
+  transform: scale(1.1);
+}
+
+.track .bg-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  filter: grayscale(0.5);
+}
+
+.track .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transition: background 0.5s ease;
+}
+
+.track-archive .overlay { background: linear-gradient(180deg, transparent, var(--blue)); }
+.track-journal .overlay { background: linear-gradient(180deg, transparent, #2a2420); }
+.track-lab .overlay { background: linear-gradient(180deg, transparent, #4a1a2a); }
+
+.track:hover .overlay {
+  opacity: 0.8;
+}
+
+.track .content {
+  position: relative;
+  z-index: 3;
+  transform: translateY(20px);
+  transition: transform 0.5s ease;
+}
+
+.track:hover .content {
+  transform: translateY(0);
+}
+
+.track .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.track h2 {
+  font-size: 48px;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 15px;
+  letter-spacing: -0.02em;
+}
+
+.track-journal h2 { font-family: 'Iowan Old Style', serif; font-style: italic; text-transform: none; }
+
+.track p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  max-width: 280px;
+  line-height: 1.5;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #4a4640;
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 900px) {
+  .universe { grid-template-columns: 1fr; }
+  .track { height: 500px; padding: 40px; }
+  .welcome-header { padding: 80px 20px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="sketch-bg"></div>
+
+<header class="welcome-header">
+  <span class="pre">DIRECTOR'S CUT // UNIVERSE.R1</span>
+  <h1>Welcome, <span>James Thompson.</span></h1>
+  <div class="intro-text">
+    The following proposals document the evolution of Black Badger. We've moved beyond the marketplace to build a universe where materials speak and process is the product.
+  </div>
+</header>
+
+<div class="universe">
+  <a href="archive/index.html" class="track track-archive">
+    <div class="bg-img">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924" alt="Archive">
+    </div>
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="label">Direction 01</span>
+      <h2>The Archive</h2>
+      <p>Technical rigor. Drafting grids. The engineering mind behind the forge.</p>
+    </div>
+  </a>
+
+  <a href="journal/index.html" class="track track-journal">
+    <div class="bg-img">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_5166.jpg?v=1770908570" alt="Journal">
+    </div>
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="label">Direction 02</span>
+      <h2>The Journal</h2>
+      <p>Raw. Tactile. The 40-hour week captured in ink and metal dust.</p>
+    </div>
+  </a>
+
+  <a href="lab/index.html" class="track track-lab">
+    <div class="bg-img">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="Lab">
+    </div>
+    <div class="overlay"></div>
+    <div class="content">
+      <span class="label">Direction 03</span>
+      <h2>The Lab</h2>
+      <p>Cinematic storytelling. Manga panels meets proprietary Badgerite glows.</p>
+    </div>
+  </a>
+</div>
+
+<footer class="footer">
+  BLACK BADGER DESIGN LAB // GOTHEBORG // 2025
+</footer>
+
+</body>
+</html>

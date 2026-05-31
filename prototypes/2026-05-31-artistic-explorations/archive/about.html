@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — Engineering Mind [Track 01]</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+:root {
+  --bg: #002b5c;
+  --fg: #ffffff;
+  --muted: #4d88ff;
+  --accent: #ffcc00;
+  --grid: rgba(255, 255, 255, 0.1);
+  --line: rgba(255, 255, 255, 0.3);
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--mono);
+  background: var(--bg);
+  color: var(--fg);
+  background-image: 
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.nav { padding: 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); }
+.nav .logo { font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; text-decoration: none; color: var(--fg); }
+.nav .links a { margin-left: 30px; text-decoration: none; color: var(--muted); font-size: 13px; }
+.nav .links a.active { color: var(--fg); }
+
+.container { padding: 80px 100px; max-width: 1200px; margin: 0 auto; }
+.header { margin-bottom: 80px; }
+.header h1 { font-size: 56px; text-transform: uppercase; letter-spacing: -0.04em; margin-bottom: 20px; }
+.header p { color: var(--muted); font-size: 16px; max-width: 600px; line-height: 1.6; }
+
+.content-row { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 100px; align-items: center; }
+.content-row.reverse { direction: rtl; }
+.content-row.reverse > * { direction: ltr; }
+
+.visual-panel {
+  border: 1px solid var(--line);
+  padding: 40px;
+  background: rgba(255,255,255,0.02);
+  position: relative;
+}
+.visual-panel img {
+  width: 100%;
+  height: auto;
+  filter: brightness(0) invert(1) opacity(0.6);
+}
+.visual-panel::before {
+  content: 'FIG_01';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  color: var(--accent);
+}
+
+.text-panel h2 { font-size: 24px; text-transform: uppercase; margin-bottom: 24px; color: var(--accent); }
+.text-panel p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+.text-panel blockquote {
+  font-size: 20px;
+  color: var(--fg);
+  border-left: 2px solid var(--accent);
+  padding-left: 30px;
+  margin: 40px 0;
+  font-style: italic;
+}
+
+.lab-specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  margin-top: 80px;
+}
+.spec-cell {
+  background: var(--bg);
+  padding: 30px;
+}
+.spec-cell .label { font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; display: block; }
+.spec-cell .value { font-size: 16px; font-weight: 600; }
+
+footer { padding: 40px 100px; border-top: 1px solid var(--line); margin-top: 100px; display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+
+@media (max-width: 1024px) {
+  .container, footer { padding: 40px; }
+  .content-row { grid-template-columns: 1fr; gap: 40px; }
+  .lab-specs { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="logo">Black<span>Badger</span></a>
+  <div class="links">
+    <a href="index.html">Archive</a>
+    <a href="products.html">Products</a>
+    <a href="about.html" class="active">About</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <h1>Engineering Mind</h1>
+    <p>A deep dive into the technical methodology of James Thompson and the foundation of the Black Badger workshop.</p>
+  </div>
+
+  <div class="content-row">
+    <div class="visual-panel">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924" alt="Technical Drawing">
+    </div>
+    <div class="text-panel">
+      <h2>Technical Archeology</h2>
+      <p>James Thompson doesn't just design jewelry; he excavates industrial history. By working with materials like Fordite—layers of compressed auto paint from Detroit—he treats every piece as a core sample of time.</p>
+      <p>The Archive track focuses on this analytical approach. It is where the forge meets the drafting table, and where metallurgical limits are pushed to their breaking point.</p>
+      <blockquote>"If Black Badger has a 'thing,' it's that there's always something in there that tells a story."</blockquote>
+    </div>
+  </div>
+
+  <div class="content-row reverse">
+    <div class="visual-panel" style="background: rgba(255,204,0,0.05);">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_5166.jpg?v=1770908570" alt="Blueprint Analysis">
+    </div>
+    <div class="text-panel">
+      <h2>Material Logic</h2>
+      <p>Whether it's Zirconium reacting to fire or Damascus steel revealing its folded patterns through acid etching, the process is governed by physical laws. Our workshop in Gothenburg is a laboratory where these laws are tested daily.</p>
+      <p>We don't polish away the evidence of the making. We celebrate the marks of the tool and the grain of the alloy. This is honest design.</p>
+    </div>
+  </div>
+
+  <div class="lab-specs">
+    <div class="spec-cell">
+      <span class="label">ESTABLISHED</span>
+      <span class="value">2005.GOT</span>
+    </div>
+    <div class="spec-cell">
+      <span class="label">LATITUDE</span>
+      <span class="value">57.7089° N</span>
+    </div>
+    <div class="spec-cell">
+      <span class="label">MATERIALS</span>
+      <span class="value">14.ALLOYS</span>
+    </div>
+    <div class="spec-cell">
+      <span class="label">STATUS</span>
+      <span class="value">LAB_ACTIVE</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>BLACK BADGER // GOT-2025</p>
+  <p>ALLOY.DOC V.4.0</p>
+</footer>
+
+</body>
+</html>

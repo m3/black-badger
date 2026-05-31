@@ -1,0 +1,238 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — 3 Radical Directions</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:#0a0a0a;color:#e0e0e0;font-size:15px;line-height:1.6}
+.page{max-width:1100px;margin:0 auto;padding:40px 24px}
+.page-header{margin-bottom:48px;border-bottom:1px solid #222;padding-bottom:32px}
+.page-header h1{font-size:28px;font-weight:700;color:#fff;letter-spacing:-0.02em}
+.page-header p{color:#888;margin-top:6px;font-size:14px}
+.direction{margin-bottom:64px;border:1px solid #222;border-radius:4px;overflow:hidden;background:#111}
+.dir-label{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#161616;border-bottom:1px solid #222}
+.dir-label h2{font-size:14px;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
+.dir-label .tag{font-size:11px;color:#888;border:1px solid #333;padding:2px 8px;border-radius:2px}
+.direction .preview{padding:32px}
+
+/* === DIRECTION 1: THE COMIC DROP === */
+.comic-drop{font-family:'Inter',sans-serif;background:#0d0d0d;color:#ddd}
+.comic-drop .hero{position:relative;height:520px;background:linear-gradient(180deg,#1a1a2e 0%,#0d0d0d 100%);display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden}
+.comic-drop .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.015) 2px,rgba(255,255,255,0.015) 4px);pointer-events:none;z-index:3}
+.comic-drop .hero-img{width:100%;height:100%;background:#222;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;z-index:1;overflow:hidden}
+.comic-drop .hero-img img{width:100%;height:100%;object-fit:cover}
+.comic-drop .hero-side{padding:32px;display:flex;flex-direction:column;justify-content:center;gap:16px;z-index:2}
+.comic-drop .chap-badge{position:absolute;top:16px;left:16px;background:#c9a84c;color:#0d0d0d;font-size:11px;font-weight:700;padding:4px 10px;letter-spacing:0.08em;z-index:2}
+.comic-drop .issue-no{position:absolute;top:16px;right:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#c9a84c;border:1px solid #c9a84c;padding:3px 8px;z-index:2}
+.comic-drop .story-hero{padding:32px}
+.comic-drop .story-hero .kicker{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c9a84c;margin-bottom:12px}
+.comic-drop .story-hero h3{font-family:'Iowan Old Style',Georgia,serif;font-size:32px;font-weight:400;color:#f0e8d0;line-height:1.2;margin-bottom:14px}
+.comic-drop .story-hero .lede{color:#999;font-size:15px;line-height:1.7;max-width:600px}
+.comic-drop .panel-row{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#222;margin:0 32px 32px}
+.comic-drop .panel{padding:24px;background:#0d0d0d}
+.comic-drop .panel .panel-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#666;margin-bottom:8px}
+.comic-drop .panel .panel-value{font-size:18px;color:#f0e8d0;font-weight:600}
+.comic-drop .panel .panel-desc{font-size:12px;color:#777;margin-top:4px}
+.comic-drop .cta-row{padding:0 32px 32px;display:flex;gap:12px;align-items:center}
+.comic-drop .cta-row .price{font-family:'IBM Plex Mono',monospace;font-size:22px;color:#c9a84c;font-weight:700}
+.comic-drop .cta-row .btn-explore{background:transparent;border:1px solid #c9a84c;color:#c9a84c;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.04em}
+.comic-drop .cta-row .btn-explore:hover{background:#c9a84c;color:#0d0d0d}
+.comic-drop .press-bar{padding:20px 32px;border-top:1px solid #1a1a1a;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.comic-drop .press-bar .press-label{font-size:10px;color:#555;letter-spacing:0.1em;text-transform:uppercase}
+.comic-drop .press-bar .press-logo{font-size:11px;color:#444;font-weight:500;padding:4px 10px;border:1px solid #282828;border-radius:2px}
+
+/* === DIRECTION 2: THE WORKSHOP JOURNAL === */
+.workshop-journal{font-family:'Inter',sans-serif;background:#faf8f4;color:#1a1a1a}
+.workshop-journal .article-header{max-width:720px;margin:0 auto;padding:48px 24px 0}
+.workshop-journal .article-header .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#a08060;margin-bottom:16px;display:flex;gap:16px;align-items:center}
+.workshop-journal .article-header .meta .dot{width:4px;height:4px;background:#a08060;border-radius:50%}
+.workshop-journal .article-header h3{font-family:'Iowan Old Style',Georgia,serif;font-size:42px;font-weight:400;line-height:1.15;color:#1a1a1a;margin-bottom:20px;letter-spacing:-0.01em}
+.workshop-journal .article-header .standfirst{font-size:18px;line-height:1.6;color:#555;max-width:560px}
+.workshop-journal .hero-img{width:100%;max-width:720px;margin:32px auto;display:block;background:#e8e4dc;height:400px;display:flex;align-items:center;justify-content:center;font-size:56px;border-radius:4px}
+.workshop-journal .article-body{max-width:720px;margin:0 auto;padding:0 24px 48px}
+.workshop-journal .article-body p{font-size:16px;line-height:1.8;color:#333;margin-bottom:20px}
+.workshop-journal .article-body blockquote{border-left:3px solid #c9a84c;padding:8px 0 8px 20px;margin:28px 0;font-family:'Iowan Old Style',Georgia,serif;font-size:22px;color:#2a2a2a;font-style:italic;line-height:1.5}
+.workshop-journal .article-body .spec-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ddd;margin:28px 0}
+.workshop-journal .article-body .spec-cell{background:#faf8f4;padding:16px}
+.workshop-journal .article-body .spec-cell .label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-bottom:4px}
+.workshop-journal .article-body .spec-cell .value{font-size:15px;font-weight:600;color:#1a1a1a}
+.workshop-journal .article-body .cta-section{border-top:1px solid #ddd;padding-top:28px;margin-top:32px;display:flex;align-items:center;justify-content:space-between}
+.workshop-journal .article-body .cta-section .price{font-family:'IBM Plex Mono',monospace;font-size:24px;color:#8a6a3a;font-weight:700}
+.workshop-journal .article-body .cta-section .btn{background:#1a1a1a;color:#faf8f4;padding:10px 24px;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:4px}
+.workshop-journal .article-body .cta-section .btn:hover{background:#333}
+.workshop-journal .share-bar{padding:20px 24px;border-top:1px solid #e8e4dc;display:flex;align-items:center;gap:12px;font-size:12px;color:#999}
+
+/* === DIRECTION 3: THE SIGNAL PLATFORM === */
+.signal-platform{font-family:'Inter',sans-serif;background:#0a0a0a;color:#eee;padding:24px;max-width:480px;margin:0 auto}
+.signal-platform .drop-header{text-align:center;padding:20px 0;border-bottom:1px solid #1a1a1a;margin-bottom:24px}
+.signal-platform .drop-header .brand{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#888}
+.signal-platform .drop-header h3{font-size:22px;font-weight:700;color:#fff;margin-top:8px;letter-spacing:-0.02em}
+.signal-platform .drop-header .edition{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#c04060;margin-top:4px}
+.signal-platform .drop-visual{width:100%;aspect-ratio:1;background:#141414;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:56px;margin-bottom:20px;position:relative}
+.signal-platform .drop-visual .limited-badge{position:absolute;top:10px;left:10px;background:#c04060;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;letter-spacing:0.08em;border-radius:2px}
+.signal-platform .drop-visual .arrow-nav{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.1);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer}
+.signal-platform .drop-story{font-size:14px;line-height:1.7;color:#999;padding:0 4px;margin-bottom:20px}
+.signal-platform .drop-story strong{color:#ddd;font-weight:600}
+.signal-platform .drop-story em{color:#887;font-style:italic}
+.signal-platform .materials{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.signal-platform .materials .mat-tag{font-size:11px;padding:4px 10px;border:1px solid #333;border-radius:12px;color:#aaa}
+.signal-platform .countdown{background:#111;border:1px solid #222;border-radius:6px;padding:14px;margin-bottom:20px;text-align:center}
+.signal-platform .countdown .cd-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#666;margin-bottom:6px}
+.signal-platform .countdown .cd-timer{font-family:'IBM Plex Mono',monospace;font-size:18px;color:#c04060;font-weight:700;letter-spacing:0.04em}
+.signal-platform .size-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:20px}
+.signal-platform .size-grid .sz{border:1px solid #2a2a2a;border-radius:4px;padding:10px 0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#888;cursor:pointer}
+.signal-platform .size-grid .sz.active{border-color:#c04060;color:#fff;background:rgba(192,64,96,0.1)}
+.signal-platform .size-grid .sz:hover{border-color:#555}
+.signal-platform .drop-cta{background:#c04060;color:#fff;border:none;padding:14px;width:100%;font-size:14px;font-weight:700;border-radius:6px;cursor:pointer;margin-bottom:8px;letter-spacing:0.02em}
+.signal-platform .drop-cta.secondary{background:transparent;border:1px solid #333;color:#aaa;margin-bottom:0}
+.signal-platform .prove-bar{margin-top:20px;padding:14px;background:#111;border-radius:6px;display:flex;gap:12px;align-items:center;font-size:11px;color:#666}
+.signal-platform .prove-bar .avatar{width:28px;height:28px;border-radius:50%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;font-size:14px}
+.signal-platform .site-ref{text-align:center;padding:32px 0 16px;font-size:10px;color:#444;letter-spacing:0.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="page-header">
+<h1>Black Badger — 3 Radical Directions</h1>
+<p>Inspired by MicroMilSpec's universe-building approach: the product is an artifact from a story, not just a thing to buy.</p>
+</div>
+
+<!-- DIRECTION 1 -->
+<div class="direction">
+<div class="dir-label">
+<h2>01 — The Comic Drop</h2>
+<span class="tag">Universe &gt; Product</span>
+</div>
+<div class="preview">
+<div class="comic-drop">
+<div class="hero">
+<div class="hero-side">
+<div class="chap-badge">CHAPTER 04</div>
+<div class="issue-no">ISSUE #020</div>
+<div style="margin-top:auto">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#666;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">Featured Artifact</div>
+<div style="font-family:'Iowan Old Style',Georgia,serif;font-size:24px;color:#f0e8d0;line-height:1.3">The Black Badger<br>20th Anniversary Ring</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#c9a84c;font-weight:700;margin-top:12px">$2,000</div>
+</div>
+</div>
+<div class="hero-img"><img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="20th Anniversary Ring"></div>
+</div>
+<div class="story-hero">
+<div class="kicker">From the Black Badger Archive</div>
+<h3>The Black Badger<br>20th Anniversary Ring</h3>
+<p class="lede">An object that fell out of the Black Badger universe. Twenty years of making, distilled into one piece.</p>
+</div>
+<div class="panel-row">
+<div class="panel"><div class="panel-label">Universe</div><div class="panel-value">R1</div><div class="panel-desc">Project Sabotage</div></div>
+<div class="panel"><div class="panel-label">Chapter</div><div class="panel-value">04</div><div class="panel-desc">The Anniversary Arc</div></div>
+<div class="panel"><div class="panel-label">Material</div><div class="panel-value">W + Lume</div><div class="panel-desc">Tungsten core</div></div>
+<div class="panel"><div class="panel-label">Edition</div><div class="panel-value">1 of 20</div><div class="panel-desc">Serialized</div></div>
+</div>
+<div class="cta-row">
+<div class="price">$2,000</div>
+<button class="btn-explore">Explore the Story</button>
+</div>
+<div class="press-bar">
+<div class="press-label">Press</div>
+<div class="press-logo">Hypebeast</div>
+<div class="press-logo">Highsnobiety</div>
+<div class="press-logo">SSENSE</div>
+<div class="press-logo">A君 Column</div>
+<div class="press-logo">Hypegadget</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- DIRECTION 2 -->
+<div class="direction">
+<div class="dir-label">
+<h2>02 — The Workshop Journal</h2>
+<span class="tag">Story &gt; Commerce</span>
+</div>
+<div class="preview">
+<div class="workshop-journal">
+<div class="article-header">
+<div class="meta">Studio Report<span class="dot"></span>7 min read<span class="dot"></span>June 2026</div>
+<h3>The 20th Anniversary Ring</h3>
+<p class="standfirst">James Thompson on the materials, the mistakes, and the moment he knew the 20th Anniversary Ring was done.</p>
+</div>
+<img class="hero-img" src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="20th Anniversary Ring" style="width:100%;max-width:720px;height:400px;object-fit:cover;border-radius:4px;margin:32px auto;display:block">
+<div class="article-body">
+<p>The ring started as a sketch on a napkin in a Gothenburg bar in 2006. Just a circle with two words: "last forever." Twenty years later, that napkin became the 20th Anniversary Ring — tungsten core, lume inlay, serial numbered.</p>
+<blockquote>"I didn't set out to make a commemorative piece. I set out to make the ring I'd want to wear every single day. The anniversary part came later."</blockquote>
+<p>What makes this ring different from the previous 19 iterations isn't the materials — it's the patience. Thompson spent three months on the lume channeling alone, layering the compound by hand until it glowed the exact shade of the midnight sea outside his workshop.</p>
+<div class="spec-row">
+<div class="spec-cell"><div class="label">Material</div><div class="value">Tungsten + Lume</div></div>
+<div class="spec-cell"><div class="label">Weight</div><div class="value">14.2g</div></div>
+<div class="spec-cell"><div class="label">Limited</div><div class="value">20 pieces</div></div>
+</div>
+<p>Each piece ships with a certificate of provenance, a material sample from the original billet, and a handwritten note from the workshop.</p>
+<div class="cta-section">
+<div class="price">$2,000</div>
+<button class="btn">Reserve yours</button>
+</div>
+</div>
+<div class="share-bar"><div>🔗 Share</div><div>↗ Open</div><div>🔖 Save</div><div style="margin-left:auto;font-size:10px;color:#bbb">blackbadger.se/journal</div></div>
+</div>
+</div>
+</div>
+
+<!-- DIRECTION 3 -->
+<div class="direction">
+<div class="dir-label">
+<h2>03 — The Signal</h2>
+<span class="tag">Drop &gt; Catalog</span>
+</div>
+<div class="preview">
+<div class="signal-platform">
+<div class="drop-header">
+<div class="brand">Black Badger × 2026</div>
+<h3>The 20th</h3>
+<div class="edition">Limited Drop — Winter 2026</div>
+</div>
+<div class="drop-visual">
+<div class="limited-badge">20 MADE</div>
+<img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="20th Anniversary Ring" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+<div class="arrow-nav">→</div>
+</div>
+<div class="drop-story">
+This is what happens when a maker spends <strong>twenty years</strong> learning how to make one thing properly. <em>Tungsten core. Lume inlay. Serial numbered.</em> Each ring carries its production number laser-etched inside the band — from 001 to 020.
+</div>
+<div class="materials">
+<div class="mat-tag">Tungsten</div>
+<div class="mat-tag">Lume Compound</div>
+<div class="mat-tag">Swedish Made</div>
+<div class="mat-tag">Serial 1/20</div>
+</div>
+<div class="countdown">
+<div class="cd-label">Next Drop Opens</div>
+<div class="cd-timer">03 : 14 : 07 : 22</div>
+</div>
+<div class="size-grid">
+<div class="sz">17.3</div>
+<div class="sz">18.1</div>
+<div class="sz active">18.9</div>
+<div class="sz">19.8</div>
+<div class="sz">20.6</div>
+<div class="sz">21.4</div>
+<div class="sz">22.2</div>
+<div class="sz">23.0</div>
+</div>
+<button class="drop-cta">Reserve — $2,000</button>
+<button class="drop-cta secondary">Get notified</button>
+<div class="prove-bar">
+<div class="avatar">☺</div>
+<div><strong style="color:#ccc">14 people</strong> viewing this drop right now</div>
+</div>
+<div class="site-ref">From blackbadger.se/drop</div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>
