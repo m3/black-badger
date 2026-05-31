@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "Pastel Manga Directions × 3",
+  "entry": "directions-manga.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-05-30T08:25:18.709Z",
+  "updatedAt": "2026-05-30T08:25:18.720Z",
+  "sourceSkillId": "agent-browser",
+  "designSystemId": "default",
+  "metadata": {
+    "identifier": "directions-manga",
+    "artifactType": "text/html",
+    "inferred": false
+  }
+}

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Black Badger — Artistic Directions</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --bg: #f8f8f8;
+            --fg: #1a1a1a;
+            --blue: #2b4b7c;
+            --grid: #e0e0e0;
+            --accent: #c44060;
+            --paper: #fdfaf5;
+            --mono: 'IBM Plex Mono', monospace;
+            --sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--sans); background: var(--bg); color: var(--fg); line-height: 1.6; }
+        
+        .page { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+        .header { margin-bottom: 60px; border-bottom: 2px solid var(--fg); padding-bottom: 20px; }
+        .header h1 { font-size: 24px; letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--mono); }
+        
+        .direction { margin-bottom: 100px; }
+        .dir-label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: #888; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .dir-label::after { content: ''; flex: 1; height: 1px; background: #ddd; }
+
+        /* --- DIRECTION 01: THE DRAFTING TABLE --- */
+        .blueprint {
+            background: #eef2f7;
+            border: 1px solid #d0d8e0;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            position: relative;
+            background-image: 
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .blueprint .hero-visual { position: relative; border: 1px solid var(--blue); background: #fff; padding: 20px; box-shadow: 10px 10px 0 rgba(43,75,124,0.1); }
+        .blueprint .hero-visual img { width: 100%; height: auto; display: block; filter: contrast(1.1) grayscale(0.2); }
+        .blueprint .note { font-family: var(--mono); font-size: 11px; color: var(--blue); position: absolute; }
+        .blueprint .note.top-left { top: -10px; left: -10px; transform: rotate(-2deg); background: #fff; padding: 4px 8px; border: 1px solid var(--blue); }
+        .blueprint .spec-sheet { background: #fff; border: 1px solid var(--blue); padding: 32px; font-family: var(--mono); }
+        .blueprint h2 { font-size: 32px; margin-bottom: 16px; color: var(--blue); text-transform: uppercase; border-bottom: 2px solid var(--blue); padding-bottom: 8px; }
+        .blueprint .metadata { font-size: 10px; color: var(--blue); margin-bottom: 24px; border-bottom: 1px solid #d0d8e0; padding-bottom: 16px; }
+        .blueprint p { font-size: 14px; margin-bottom: 20px; color: #445566; }
+
+        /* --- DIRECTION 02: THE STUDIO JOURNAL --- */
+        .journal {
+            background: var(--paper);
+            border: 1px solid #e0d8cc;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .journal .top-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #e0d8cc;
+        }
+        .journal .img-panel { height: 500px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center; border-right: 1px solid #e0d8cc; }
+        .journal .img-panel img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+        .journal .text-panel { padding: 48px; display: flex; flex-direction: column; justify-content: center; }
+        .journal .manga-bubble {
+            background: #fff;
+            border: 2px solid var(--fg);
+            padding: 24px;
+            border-radius: 40px 40px 40px 0;
+            position: relative;
+            margin-bottom: 32px;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.05);
+        }
+        .journal .manga-bubble::before { content: 'JAMES:'; font-family: var(--mono); font-size: 10px; font-weight: 700; position: absolute; top: -12px; left: 20px; background: var(--paper); padding: 0 8px; }
+        .journal h2 { font-size: 42px; line-height: 1.1; margin-bottom: 20px; font-weight: 800; letter-spacing: -0.02em; }
+        .journal .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: #e0d8cc;
+            margin-top: auto;
+            border-top: 1px solid #e0d8cc;
+        }
+        .journal .lab-cell { background: #fff; aspect-ratio: 1; padding: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .journal .lab-cell img { width: 100%; height: 100%; object-fit: cover; filter: sepia(0.2); }
+
+        /* --- DIRECTION 03: THE WORKSHOP LAB --- */
+        .neon-lab {
+            background: #0f0f0f;
+            color: #e0e0e0;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            font-family: var(--sans);
+        }
+        .neon-lab .panel { 
+            background: #1a1a1a; 
+            border: 2px solid #333; 
+            overflow: hidden; 
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .neon-lab .panel-hero { grid-column: span 8; grid-row: span 2; }
+        .neon-lab .panel-hero img { width: 100%; height: 100%; object-fit: cover; }
+        .neon-lab .panel-side { grid-column: span 4; display: flex; flex-direction: column; padding: 24px; justify-content: center; }
+        .neon-lab .panel-side h2 { font-size: 28px; line-height: 1.1; margin-bottom: 16px; font-weight: 800; color: #fff; }
+        .neon-lab .panel-side .ch-tag { font-family: var(--mono); font-size: 10px; color: var(--accent); border: 1px solid var(--accent); padding: 4px 8px; display: inline-block; margin-bottom: 16px; text-transform: uppercase; }
+        .neon-lab .panel-side .price-tag { font-family: var(--mono); font-size: 24px; color: var(--accent); font-weight: 700; margin-top: auto; }
+        .neon-lab .panel-bottom { grid-column: span 4; background: var(--accent); color: #000; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+        .neon-lab .panel-bottom .sfx { font-family: var(--mono); font-size: 14px; font-weight: 700; margin-bottom: 8px; opacity: 0.8; }
+        .neon-lab .panel-bottom p { font-size: 16px; font-weight: 600; line-height: 1.4; }
+        .neon-lab .halftone-overlay { position: absolute; inset: 0; background-image: radial-gradient(#000 1px, transparent 1px); background-size: 6px 6px; opacity: 0.1; pointer-events: none; }
+
+        @media (max-width: 900px) {
+            .blueprint, .journal .top-panel { grid-template-columns: 1fr; }
+            .neon-lab { grid-template-columns: 1fr; }
+            .neon-lab .panel-hero, .neon-lab .panel-side, .neon-lab .panel-bottom { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>Black Badger / Artistic Exploration</h1>
+            <p>Moving from a "Marketplace" to a "Creative Universe".</p>
+        </div>
+
+        <!-- DIRECTION 01 -->
+        <div class="direction">
+            <div class="dir-label">Direction 01: The Drafting Table</div>
+            <div class="blueprint">
+                <div class="hero-visual">
+                    <div class="note top-left">PROJECT SABOTAGE / R1</div>
+                    <img src="mpsmsn28-mps9y8an-image.png" alt="Ring on Blueprint">
+                    <div class="note" style="bottom: 10px; right: 10px; color: var(--blue)">SPECIMEN ID: 20TH-ANNIV</div>
+                </div>
+                <div class="spec-sheet">
+                    <div class="metadata">
+                        GOT 05-30-26 // ARCHIVE: BB-20-A<br>
+                        MATERIAL: BADGERITE / TUNGSTEN / LUME
+                    </div>
+                    <h2>The 20th Anniversary Ring</h2>
+                    <p>It's been 20 years since I started Black Badger. This ring is a physical object that fell out of that universe and landed on your finger.</p>
+                    <p>Milled from solid Zirconium metal with a tech-hex background patterning. The core is a proprietary composite 20 years in the making.</p>
+                    <div style="margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div style="font-size: 10px; color: var(--blue)">SIZE: 17 - 22.5mm<br>STATUS: IN WORKSHOP</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--blue)">$2,000.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIRECTION 02 -->
+        <div class="direction">
+            <div class="dir-label">Direction 02: The Studio Journal</div>
+            <div class="journal">
+                <div class="top-panel">
+                    <div class="img-panel">
+                        <img src="mpsn07me-mpsa4vwd-image.png" alt="Workshop Shot">
+                    </div>
+                    <div class="text-panel">
+                        <div class="manga-bubble">
+                            "I started this company with the aim of creating fun little objects that had no other job than to make us smile."
+                        </div>
+                        <h2>The Fordite / Damascus Artifact</h2>
+                        <p style="font-size: 16px; color: #666; margin-bottom: 24px;">Detroit auto paint history meet high-end metallurgy. Hand-forged by Chris Ploof, finished in the Gothenburg workshop.</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                            <div style="font-family: var(--mono); font-size: 20px; font-weight: 700;">$1,500.00</div>
+                            <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.1em;">Chapter 12 / Specimen 03</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lab-grid">
+                    <div class="lab-cell"><img src="mpqog8bu-Bluetongue_Zirc.jpg"></div>
+                    <div class="lab-cell"><img src="mpqog8cd-image_0c7e0d4b.jpg"></div>
+                    <div class="lab-cell"><img src="mpqog8cl-IMG_5166.jpg"></div>
+                    <div class="lab-cell"><img src="mpqog8ct-IMG_7305_bc705bf7-fb14-4818-b8f8-3e98b186d1f2.jpg"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIRECTION 03 -->
+        <div class="direction">
+            <div class="dir-label">Direction 03: The Workshop Lab</div>
+            <div class="neon-lab">
+                <div class="panel panel-hero">
+                    <img src="mpsn07mt-mpsa3dfj-image.png" alt="Ring on Blueprint Close">
+                    <div class="halftone-overlay"></div>
+                </div>
+                <div class="panel panel-side">
+                    <div class="ch-tag">Artifact R1.0</div>
+                    <h2>Zirconium<br>Pawprint</h2>
+                    <p style="font-size: 14px; color: #999; margin-bottom: 24px;">Milled from solid Zirconium metal. Blowtorched black. Technical archeology in physical form.</p>
+                    <div class="price-tag">$400.00</div>
+                </div>
+                <div class="panel panel-bottom">
+                    <div class="sfx">KACHINK —</div>
+                    <p>"Zirconium behaves differently under a torch—it's like painting with fire."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

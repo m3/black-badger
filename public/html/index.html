@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Black Badger — Design Proposals for James</title>
+<title>Black Badger — Artistic Directions</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Iowan+Old+Style:ital,wght@0,700;1,400&family=Inter:wght@400;900&family=IBM+Plex+Mono:wght@400;700&display=swap');
 
@@ -11,6 +11,8 @@
   --bg: #0c0b0a;
   --fg: #e8e4dc;
   --accent: #c9a84c;
+  --blue: #002b5c;
+  --rose: #c4708a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,184 +25,233 @@ body {
   overflow-x: hidden;
 }
 
+/* ── ARTISTIC OVERLAY ── */
+.sketch-bg {
+  position: fixed;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url('https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1) invert(1);
+}
+
 .welcome-header {
-  padding: 80px 40px 40px;
-  text-align: center;
-  max-width: 900px;
+  position: relative;
+  z-index: 1;
+  padding: 120px 40px 60px;
+  text-align: left;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.welcome-header .pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 20px;
+  display: block;
+  letter-spacing: 0.3em;
 }
 
 .welcome-header h1 {
   font-family: 'Iowan Old Style', serif;
-  font-size: clamp(32px, 5vw, 56px);
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
+  font-size: clamp(40px, 8vw, 84px);
+  margin-bottom: 30px;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
 }
 
 .welcome-header h1 span {
-  color: var(--accent);
+  display: block;
   font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  padding-left: 10%;
 }
 
-.welcome-header p {
-  font-size: 18px;
+.welcome-header .intro-text {
+  font-size: 20px;
   color: #8a8478;
   line-height: 1.6;
-  margin-bottom: 40px;
+  max-width: 600px;
+  margin-bottom: 60px;
+  border-left: 2px solid var(--accent);
+  padding-left: 30px;
 }
 
 .universe {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 65vh;
+  gap: 2px;
+  background: #1a1714;
   width: 100%;
-  border-top: 1px solid #2a2620;
-  border-bottom: 1px solid #2a2620;
 }
 
 .track {
   position: relative;
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  height: 70vh;
   overflow: hidden;
-  cursor: pointer;
   text-decoration: none;
+  color: inherit;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 40px;
-  border-right: 1px solid #2a2620;
+  padding: 60px;
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.track:last-child { border-right: none; }
-
 .track:hover {
-  background: rgba(255,255,255,0.02);
+  flex-grow: 1.2;
 }
 
 .track .bg-img {
   position: absolute;
   inset: 0;
-  opacity: 0.3;
-  transition: all 0.8s ease;
   z-index: 1;
+  transition: transform 1s ease;
 }
 
 .track:hover .bg-img {
-  opacity: 0.6;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .track .bg-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.4;
+  filter: grayscale(0.5);
+}
+
+.track .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  transition: background 0.5s ease;
+}
+
+.track-archive .overlay { background: linear-gradient(180deg, transparent, var(--blue)); }
+.track-journal .overlay { background: linear-gradient(180deg, transparent, #2a2420); }
+.track-lab .overlay { background: linear-gradient(180deg, transparent, #4a1a2a); }
+
+.track:hover .overlay {
+  opacity: 0.8;
 }
 
 .track .content {
   position: relative;
-  z-index: 2;
-  transition: transform 0.4s ease;
+  z-index: 3;
+  transform: translateY(20px);
+  transition: transform 0.5s ease;
 }
 
 .track:hover .content {
-  transform: translateY(-10px);
+  transform: translateY(0);
 }
 
-.track .kicker {
+.track .label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  margin-bottom: 15px;
+  color: var(--accent);
+  margin-bottom: 20px;
   display: block;
 }
 
 .track h2 {
-  font-size: 32px;
-  text-transform: uppercase;
+  font-size: 48px;
   font-weight: 900;
+  text-transform: uppercase;
   line-height: 1;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  letter-spacing: -0.02em;
 }
+
+.track-journal h2 { font-family: 'Iowan Old Style', serif; font-style: italic; text-transform: none; }
 
 .track p {
-  font-size: 13px;
-  color: #a09a8a;
-  max-width: 240px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  max-width: 280px;
+  line-height: 1.5;
 }
 
-/* ── THEMES ── */
-.track-archive .kicker { color: #ffcc00; }
-.track-archive .bg-img { mix-blend-mode: overlay; background: #002b5c; }
-
-.track-journal .kicker { color: #8a6a3a; }
-.track-journal h2 { font-family: 'Iowan Old Style', serif; font-style: italic; text-transform: none; }
-.track-journal .bg-img { mix-blend-mode: multiply; }
-
-.track-lab .kicker { color: #c4708a; }
-.track-lab .bg-img { mix-blend-mode: color-dodge; }
-
 .footer {
-  padding: 60px 40px;
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
   text-align: center;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 11px;
   color: #4a4640;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
 }
 
 @media (max-width: 900px) {
-  .universe { grid-template-columns: 1fr; height: auto; }
-  .track { height: 400px; }
-  .welcome-header { padding: 40px 20px; }
+  .universe { grid-template-columns: 1fr; }
+  .track { height: 500px; padding: 40px; }
+  .welcome-header { padding: 80px 20px 40px; }
 }
 </style>
 </head>
 <body>
 
+<div class="sketch-bg"></div>
+
 <header class="welcome-header">
-  <p class="font-mono" style="color: var(--accent); margin-bottom: 10px;">PROJECT // Sabotage</p>
-  <h1>Welcome back, <span>James</span>.</h1>
-  <p>I've developed three distinct artistic directions for the Black Badger universe. Each explores a different facet of your craft—from technical blueprints to the raw journal of the workbench.</p>
+  <span class="pre">DIRECTOR'S CUT // UNIVERSE.R1</span>
+  <h1>Welcome, <span>James Thompson.</span></h1>
+  <div class="intro-text">
+    The following proposals document the evolution of Black Badger. We've moved beyond the marketplace to build a universe where materials speak and process is the product.
+  </div>
 </header>
 
 <div class="universe">
   <a href="archive/index.html" class="track track-archive">
     <div class="bg-img">
-      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924" alt="Technical Archive">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7876.jpg?v=1774263924" alt="Archive">
     </div>
+    <div class="overlay"></div>
     <div class="content">
-      <span class="kicker">Proposal 01</span>
+      <span class="label">Direction 01</span>
       <h2>The Archive</h2>
-      <p>Technical specifications and engineering-first documentation. Metallurgical archeology.</p>
+      <p>Technical rigor. Drafting grids. The engineering mind behind the forge.</p>
     </div>
   </a>
 
   <a href="journal/index.html" class="track track-journal">
     <div class="bg-img">
-      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_5166.jpg?v=1770908570" alt="Process Journal">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_5166.jpg?v=1770908570" alt="Journal">
     </div>
+    <div class="overlay"></div>
     <div class="content">
-      <span class="kicker">Proposal 02</span>
+      <span class="label">Direction 02</span>
       <h2>The Journal</h2>
-      <p>The diary of a maker. Process-forward storytelling from the Gothenburg workshop.</p>
+      <p>Raw. Tactile. The 40-hour week captured in ink and metal dust.</p>
     </div>
   </a>
 
   <a href="lab/index.html" class="track track-lab">
     <div class="bg-img">
-      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="Artistic Lab">
+      <img src="https://cdn.shopify.com/s/files/1/0089/0175/4961/files/IMG_7859.jpg?v=1774263924" alt="Lab">
     </div>
+    <div class="overlay"></div>
     <div class="content">
-      <span class="kicker">Proposal 03</span>
+      <span class="label">Direction 03</span>
       <h2>The Lab</h2>
-      <p>Cinematic manga-inspired layouts. Focusing on the vibrant inner life of Badgerite.</p>
+      <p>Cinematic storytelling. Manga panels meets proprietary Badgerite glows.</p>
     </div>
   </a>
 </div>
 
 <footer class="footer">
-  ESTD 2005 // GOTHEBORG SWEDEN // DESIGN PROPOSALS V2.0
+  BLACK BADGER DESIGN LAB // GOTHEBORG // 2025
 </footer>
 
 </body>

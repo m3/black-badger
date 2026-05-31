@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "Black Badger — The 20th Anniversary Ring",
+  "entry": "product-2.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-05-29T22:30:53.740Z",
+  "updatedAt": "2026-05-29T22:30:53.751Z",
+  "sourceSkillId": "agent-browser",
+  "designSystemId": "default",
+  "metadata": {
+    "identifier": "product",
+    "artifactType": "text/html",
+    "inferred": false
+  }
+}
