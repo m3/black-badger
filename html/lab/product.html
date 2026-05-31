@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — Episode [Track 03]</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+:root {
+  --bg: #fdf6f0;
+  --fg: #2a2020;
+  --primary: #c4708a;
+  --secondary: #8b70c4;
+  --ink: #1a1a1a;
+  --sans: 'Inter', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: var(--bg); color: var(--fg); line-height: 1.6; }
+.halftone { position: fixed; inset: 0; pointer-events: none; opacity: 0.05; background-image: radial-gradient(var(--primary) 1px, transparent 0); background-size: 10px 10px; z-index: 1000; }
+
+.nav { padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--ink); background: var(--bg); position: sticky; top: 0; z-index: 100; }
+.nav .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; color: var(--ink); text-decoration: none; letter-spacing: -0.05em; }
+.nav .links a { margin-left: 25px; text-decoration: none; color: var(--ink); font-family: var(--mono); font-size: 12px; font-weight: 600; text-transform: uppercase; }
+.nav .links a.active { color: var(--primary); }
+
+.container { padding: 40px 40px 100px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+
+.episode-visual { position: sticky; top: 120px; }
+.splash-panel { border: 3px solid var(--ink); background: #fff; padding: 15px; position: relative; overflow: hidden; margin-bottom: 30px; }
+.splash-panel img { width: 100%; display: block; filter: contrast(1.1); }
+.splash-panel::after { content: 'FULL SCAN'; position: absolute; top: 10px; left: 10px; background: var(--ink); color: #fff; padding: 2px 10px; font-family: var(--mono); font-size: 9px; font-weight: 700; }
+
+.glow-test { 
+  border: 3px solid var(--ink); background: #1a1a1a; padding: 40px; text-align: center; color: #fff; cursor: pointer; transition: background 0.5s; 
+}
+.glow-test:hover { background: #000; }
+.glow-test .ring-glow { font-size: 60px; filter: drop-shadow(0 0 0 transparent); transition: filter 0.5s, transform 0.5s; }
+.glow-test.active .ring-glow { filter: drop-shadow(0 0 20px var(--primary)); transform: scale(1.1); }
+
+.episode-info .badge { background: var(--secondary); color: #fff; padding: 4px 12px; font-family: var(--mono); font-size: 10px; display: inline-block; margin-bottom: 24px; border: 2px solid var(--ink); }
+.episode-info h1 { font-size: 56px; font-weight: 900; text-transform: uppercase; line-height: 0.9; margin-bottom: 20px; letter-spacing: -0.05em; color: var(--ink); }
+.episode-info .price { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 40px; display: block; }
+.episode-info p { font-size: 18px; color: #6a5a5a; margin-bottom: 40px; }
+
+.bubble { border: 3px solid var(--ink); border-radius: 30px; border-bottom-left-radius: 0; padding: 25px; background: #fff; margin-bottom: 40px; position: relative; }
+.bubble::after { content: 'JAMES:'; position: absolute; bottom: -10px; left: -10px; background: var(--ink); color: #fff; padding: 2px 8px; font-family: var(--mono); font-size: 9px; font-weight: 700; }
+.bubble blockquote { font-size: 17px; font-weight: 600; color: var(--ink); }
+
+.panel-data { border-top: 3px solid var(--ink); padding-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.data-box { border: 2px solid var(--ink); padding: 20px; background: #fff; }
+.data-label { font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--secondary); display: block; margin-bottom: 10px; text-transform: uppercase; }
+.data-value { font-size: 15px; font-weight: 700; color: var(--ink); }
+
+.procure-btn { 
+  margin-top: 50px; width: 100%; border: 3px solid var(--ink); background: var(--primary); color: #fff; padding: 20px; font-weight: 900; font-size: 14px; text-transform: uppercase; cursor: pointer; letter-spacing: 0.1em; transition: transform 0.1s; 
+}
+.procure-btn:hover { transform: translate(-4px, -4px); box-shadow: 4px 4px 0 var(--ink); }
+
+footer { grid-column: span 2; padding: 60px 0; border-top: 3px solid var(--ink); display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; font-weight: 600; margin-top: 80px; }
+
+@media (max-width: 1024px) {
+  .container { grid-template-columns: 1fr; padding: 40px 20px; }
+  .episode-visual { position: static; }
+  footer { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+<div class="halftone"></div>
+
+<nav class="nav">
+  <a href="../index.html" class="logo">Black<span>Badger</span></a>
+  <div class="links">
+    <a href="index.html">Episode.01</a>
+    <a href="products.html">Archive</a>
+    <a href="about.html">Universe</a>
+  </div>
+</nav>
+
+<div class="container" id="content">
+  <!-- Dynamic Content -->
+</div>
+
+<script src="../data.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const slug = params.get('slug');
+const product = PRODUCTS.find(p => p.slug === slug) || PRODUCTS[1];
+
+const content = document.getElementById('content');
+content.innerHTML = `
+  <div class="episode-visual">
+    <div class="splash-panel">
+      <img src="${product.shopifyImages[0]}" alt="${product.title}">
+    </div>
+    <div class="glow-test" onclick="this.classList.toggle('active')">
+      <span class="ring-glow">✦</span>
+      <p style="margin-top:20px; font-family: var(--mono); font-size:10px; font-weight:700;">[CLICK TO ACTIVATE GLOW]</p>
+    </div>
+  </div>
+  <div class="episode-info">
+    <span class="badge">SPECIMEN.LOG // 0${PRODUCTS.indexOf(product)+1}</span>
+    <h1>${product.title}</h1>
+    <span class="price">$${product.price}</span>
+    <p>${product.description}</p>
+    
+    <div class="bubble">
+      <blockquote>"${product.labNote}"</blockquote>
+    </div>
+
+    <div class="panel-data">
+      <div class="data-box">
+        <span class="data-label">Material</span>
+        <span class="data-value">${product.material.split('/')[0]}</span>
+      </div>
+      <div class="data-box">
+        <span class="data-label">Origin</span>
+        <span class="data-value">${product.material.split('/')[1] || 'GOT-SYSTEMS'}</span>
+      </div>
+    </div>
+
+    <button class="procure-btn">Secure this Artifact</button>
+  </div>
+
+  <footer>
+    <p>GOT-SWE-SYSTEM-0${PRODUCTS.indexOf(product)+1}</p>
+    <p>© 2025 BLACK BADGER</p>
+  </footer>
+`;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Badger — The Workshop [Track 02]</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Iowan+Old+Style:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+:root {
+  --bg: #f5f0e8;
+  --fg: #1a1714;
+  --muted: #8a7a68;
+  --accent: #8a6a3a;
+  --serif: 'Iowan Old Style', 'Charter', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); background: var(--bg); color: var(--fg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+.texture-overlay { position: fixed; inset: 0; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E"); z-index: 1000; }
+
+.nav { padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; }
+.nav .brand { font-family: var(--serif); font-size: 20px; font-weight: 700; text-decoration: none; color: var(--fg); }
+.nav .links a { margin-left: 30px; text-decoration: none; color: var(--muted); font-family: var(--mono); font-size: 11px; text-transform: uppercase; }
+.nav .links a.active { color: var(--fg); border-bottom: 1px solid var(--fg); }
+
+.container { padding: 80px 60px; max-width: 1000px; margin: 0 auto; }
+.header { margin-bottom: 80px; text-align: center; }
+.header h1 { font-family: var(--serif); font-size: 56px; font-weight: 700; font-style: italic; margin-bottom: 20px; }
+.header p { font-size: 18px; color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+.story-section { margin-bottom: 120px; }
+.story-image { width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.story-image img { width: 100%; display: block; filter: sepia(0.1); }
+.story-text { font-size: 18px; line-height: 1.8; color: #4a4440; }
+.story-text p { margin-bottom: 30px; }
+.story-text blockquote { font-family: var(--serif); font-size: 28px; line-height: 1.4; font-style: italic; color: var(--fg); margin: 60px 0; border-left: 4px solid var(--accent); padding-left: 40px; }
+
+.process-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; margin-top: 100px; }
+.process-item h3 { font-family: var(--serif); font-size: 24px; margin-bottom: 20px; }
+.process-item p { font-size: 15px; color: var(--muted); }
+
+footer { padding: 60px; border-top: 1px solid #e8e4dc; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; }
+
+@media (max-width: 1024px) {
+  .container, .nav { padding: 40px 20px; }
+  .process-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="texture-overlay"></div>
+
+<nav class="nav">
+  <a href="../index.html" class="brand">Black Badger.</a>
+  <div class="links">
+    <a href="index.html">Journal</a>
+    <a href="products.html">The Archive</a>
+    <a href="about.html" class="active">Workshop</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="header">
+    <h1>The Workshop</h1>
+    <p>Gothenburg, Sweden. Where the dust settles and the stories begin.</p>
+  </div>
+
+  <section class="story-section">
+    <div class="story-image">
+      <img src="../mpsn07mt-mpsa3dfj-image.png" alt="Workshop Process">
+    </div>
+    <div class="story-text">
+      <p>I started Black Badger with a single goal: to create objects that had no other job than to make people smile. Twenty years later, that goal hasn't changed, but the materials have gotten a lot more interesting.</p>
+      <blockquote>"I don't think of myself as a jeweler. I'm a guy who likes to see what happens when you push a material to its absolute limit."</blockquote>
+      <p>Every piece that leaves this bench has been through the forge, the lathe, and my own hands. We don't have a factory. We have a shop. It smells like cutting oil, industrial optimism, and occasionally, burnt fingertips.</p>
+    </div>
+  </section>
+
+  <div class="process-grid">
+    <div class="process-item">
+      <h3>The Forty Hours</h3>
+      <p>That's the average time it takes to build a piece from scratch. It's not efficient. It's not scalable. But it's the only way I know how to make something that feels real.</p>
+    </div>
+    <div class="process-item">
+      <h3>Honest Materials</h3>
+      <p>Whether it's Fordite from old Detroit auto plants or Damascus steel forged by Chris Ploof, we only work with materials that have a history. We don't hide the grain. We show the work.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 BLACK BADGER GOT</p>
+  <p>MADE IN SWEDEN</p>
+</footer>
+
+</body>
+</html>
